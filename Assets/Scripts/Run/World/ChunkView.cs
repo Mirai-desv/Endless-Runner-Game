@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace EndlessRunner.Run.World
 {
-    // Gắn vào root của mỗi chunk prefab.
-    // Biết điểm vào/ra, tự căn chỉnh để nối chunk, và kiểm tra chunk có đúng chuẩn không.
-    // Lưu ý: root của chunk phải có Scale = (1,1,1) và không xoay.
+    /// Gắn vào root của mỗi chunk prefab.
+    /// Lo việc: biết điểm vào/ra, tự căn chỉnh để nối chunk, và kiểm tra chunk có đúng chuẩn không.
+    /// Lưu ý: root của chunk phải có Scale = (1,1,1) và không xoay.
     public class ChunkView : MonoBehaviour
     {
         [Header("Điểm nối")]
@@ -31,7 +32,7 @@ namespace EndlessRunner.Run.World
             transform.position += previousExitWorld - entryPoint.position;
         }
 
-        // Test
+        // ---------------------------------------------------------------- Kiểm tra
 
         [ContextMenu("Validate Chunk")]
         private void ValidateAndLog()
@@ -92,12 +93,19 @@ namespace EndlessRunner.Run.World
         private void CheckGround(List<string> issues)
         {
             var spans = new List<Span>();
+
+            // Tilemap: đọc thẳng từ các ô tile có collider, không phụ thuộc physics đã sinh hình hay chưa
+            foreach (var tm in groundRoot.GetComponentsInChildren<Tilemap>())
+                if (tm.GetComponent<TilemapCollider2D>() != null)
+                    CollectTilemapSpans(tm, spans);
+
+            // Collider thường (Box, Polygon...)
             foreach (var c in groundRoot.GetComponentsInChildren<Collider2D>())
                 CollectSpans(c, spans);
 
             if (spans.Count == 0)
             {
-                issues.Add("Không tìm thấy collider nào dưới GroundRoot (nếu dùng Composite thì thử lại sau khi nó đã sinh hình).");
+                issues.Add("Không tìm thấy mặt đất nào dưới GroundRoot. " + Diagnose());
                 return;
             }
 
@@ -124,9 +132,57 @@ namespace EndlessRunner.Run.World
                 issues.Add($"Khoảng trống cuối chunk rộng {tail:0.##} (tối đa {rules.maxGapWidth}).");
         }
 
+        /// <summary>Báo cáo script đã thấy gì dưới GroundRoot, để biết thiếu khâu nào.</summary>
+        private string Diagnose()
+        {
+            int tilemaps = 0, tilemapsWithCollider = 0, tiles = 0, tilesWithCollider = 0;
+            foreach (var tm in groundRoot.GetComponentsInChildren<Tilemap>(true))
+            {
+                tilemaps++;
+                bool hasCol = tm.GetComponent<TilemapCollider2D>() != null;
+                if (hasCol) tilemapsWithCollider++;
+                foreach (var p in tm.cellBounds.allPositionsWithin)
+                {
+                    if (!tm.HasTile(p)) continue;
+                    tiles++;
+                    if (tm.GetColliderType(p) != Tile.ColliderType.None) tilesWithCollider++;
+                }
+            }
+
+            int colliders = 0, triggers = 0, inactive = 0;
+            foreach (var c in groundRoot.GetComponentsInChildren<Collider2D>(true))
+            {
+                colliders++;
+                if (c.isTrigger) triggers++;
+                if (!c.gameObject.activeInHierarchy) inactive++;
+            }
+
+            return $"[Chẩn đoán] GroundRoot = '{groundRoot.name}' ({groundRoot.childCount} object con) | " +
+                   $"Tilemap: {tilemaps} (có TilemapCollider2D: {tilemapsWithCollider}) | " +
+                   $"Tile đã vẽ: {tiles} (có Collider Type khác None: {tilesWithCollider}) | " +
+                   $"Collider2D: {colliders} (Is Trigger: {triggers}, bị tắt: {inactive})";
+        }
+
+        private static void CollectTilemapSpans(Tilemap tm, List<Span> spans)
+        {
+            foreach (var p in tm.cellBounds.allPositionsWithin)
+            {
+                if (!tm.HasTile(p)) continue;
+                if (tm.GetColliderType(p) == Tile.ColliderType.None) continue;
+
+                Vector3 origin = tm.CellToWorld(p);
+                Vector3 right = tm.CellToWorld(p + Vector3Int.right);
+                Vector3 up = tm.CellToWorld(p + Vector3Int.up);
+                spans.Add(new Span { minX = origin.x, maxX = right.x, maxY = up.y });
+            }
+        }
+
         private static void CollectSpans(Collider2D c, List<Span> spans)
         {
             if (c.isTrigger) return;
+            // Collider của Tilemap đã được xử lý riêng bằng CollectTilemapSpans
+            if (c is TilemapCollider2D) return;
+            if (c is CompositeCollider2D && c.GetComponent<Tilemap>() != null) return;
             // Collider đã được gộp vào Composite thì để Composite đại diện
             if (c.compositeOperation != Collider2D.CompositeOperation.None) return;
 
@@ -155,6 +211,8 @@ namespace EndlessRunner.Run.World
                 spans.Add(new Span { minX = b.min.x, maxX = b.max.x, maxY = b.max.y });
             }
         }
+
+        // ---------------------------------------------------------------- Gizmo
 
         private void OnDrawGizmos()
         {
