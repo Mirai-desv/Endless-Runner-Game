@@ -4,17 +4,16 @@ using UnityEngine.Tilemaps;
 
 namespace EndlessRunner.Run.World
 {
-    /// <summary>Thành phần nào trong chunk cần khôi phục trạng thái khi chunk được tái sử dụng (coin đã nhặt...) thì implement interface này.</summary>
+    // Thành phần nào trong chunk cần khôi phục trạng thái khi chunk được tái sử dụng (coin đã nhặt...) thì implement interface này
     public interface IChunkResettable
     {
         void ResetForReuse();
     }
 
-    /// <summary>
     /// Gắn vào root của mỗi chunk prefab.
     /// Lo: điểm vào/ra, căn chỉnh để nối chunk, và kiểm tra chunk có đúng chuẩn + có vượt được không.
     /// Lưu ý: root của chunk phải có Scale = (1,1,1) và không xoay.
-    /// </summary>
+
     public class ChunkView : MonoBehaviour
     {
         [Header("Điểm nối")]
@@ -43,7 +42,7 @@ namespace EndlessRunner.Run.World
             transform.position += previousExitWorld - entryPoint.position;
         }
 
-        /// <summary>Được pool gọi mỗi khi chunk được lấy ra dùng lại.</summary>
+        // Được pool gọi mỗi khi chunk được lấy ra dùng lại
         public void ResetForReuse()
         {
             resettables ??= GetComponentsInChildren<IChunkResettable>(true);

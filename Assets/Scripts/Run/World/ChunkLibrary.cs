@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EndlessRunner.Run.World
 {
-    /// <summary>Danh sách tất cả ChunkData mà generator được phép dùng.</summary>
+    // Danh sách tất cả ChunkData mà generator được phép dùng
     [CreateAssetMenu(menuName = "EndlessRunner/Chunk Library", fileName = "ChunkLibrary")]
     public class ChunkLibrary : ScriptableObject
     {

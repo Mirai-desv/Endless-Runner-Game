@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3944107908155358875, guid: 7f4c3b8e3b064ca448d546d8aa308d93, type: 3}
   difficulty: 1
   tags:
-  - Safe
+  - safe
   minSpeed: 2
   maxSpeed: 8
   weight: 3

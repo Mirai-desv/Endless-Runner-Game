@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   difficulty: 3
   tags:
-  - Very Difficult
+  - very difficult
   minSpeed: 2
   maxSpeed: 8
   weight: 3

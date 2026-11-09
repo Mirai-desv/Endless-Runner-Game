@@ -34,7 +34,7 @@ namespace EndlessRunner.Run.World
         public event Action<ChunkView, ChunkData> ChunkSpawned;
         public event Action<ChunkView> ChunkRecycled;
 
-        /// <summary>Độ khó tối đa được phép bốc. Ngày 5 DifficultyManager sẽ gán giá trị này theo quãng đường.</summary>
+        // Độ khó tối đa được phép bốc. Ngày 5 DifficultyManager sẽ gán giá trị này theo quãng đường
         public int MaxDifficulty
         {
             get => maxDifficulty;
@@ -88,7 +88,7 @@ namespace EndlessRunner.Run.World
             RecycleBehind();
         }
 
-        // ---------------------------------------------------------------- Sinh / thu hồi
+        // Sinh / thu hồi -----------------------------
 
         private bool SpawnNext()
         {
@@ -125,7 +125,7 @@ namespace EndlessRunner.Run.World
             }
         }
 
-        /// <summary>Xóa sạch chunk đang có và bắt đầu lại (dùng khi Retry).</summary>
+        // Xóa sạch chunk đang có và bắt đầu lại (dùng khi Retry)
         public void Restart(int newSeed = 0)
         {
             foreach (var v in active) pool.Release(v);
