@@ -66,8 +66,20 @@ namespace EndlessRunner.Run.World
 
             if (library != null)
                 foreach (var d in library.chunks)
-                    if (d != null && d.prefab != null)
-                        pool.Prewarm(d.prefab, prewarmPerChunk);
+                {
+                    if (d == null || d.prefab == null) continue;
+
+                    // Chống đệ quy vô hạn: prefab chunk mà chứa chính ChunkGenerator thì mỗi lần Instantiate
+                    // lại chạy Awake() -> Prewarm() -> Instantiate() ... cho tới khi tràn stack.
+                    if (d.prefab.GetComponentInChildren<ChunkGenerator>(true) != null)
+                    {
+                        Debug.LogError($"ChunkGenerator: prefab '{d.prefab.name}' (trong ChunkData '{d.name}') đang chứa ChunkGenerator → " +
+                                       "sẽ đệ quy vô hạn. Hãy gỡ ChunkGenerator khỏi prefab chunk; chỉ đặt nó trên một GameObject riêng trong Scene.", d);
+                        continue;
+                    }
+
+                    pool.Prewarm(d.prefab, prewarmPerChunk);
+                }
         }
 
         private void Start()

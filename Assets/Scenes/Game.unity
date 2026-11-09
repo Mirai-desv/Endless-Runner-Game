@@ -1970,6 +1970,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687466524}
   m_CullTransparentMesh: 1
+--- !u!1 &1960056989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960056991}
+  - component: {fileID: 1960056990}
+  m_Layer: 0
+  m_Name: ChunkGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960056990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960056989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aca4f0bfceb4f24ea59b8ed81037fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkGenerator
+  library: {fileID: 11400000, guid: 31bed27fd6acb7b489775deac4e0a85c, type: 2}
+  startChunk: {fileID: 11400000, guid: dc8b789926f60bd4b9ad296a8a258ee2, type: 2}
+  target: {fileID: 1028025281}
+  spawnAhead: 40
+  despawnBehind: 25
+  safeChunksAtStart: 2
+  avoidRepeatCount: 2
+  maxDifficulty: 1
+  seed: 0
+  prewarmPerChunk: 1
+--- !u!4 &1960056991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960056989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.58814, y: -7.13852, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2133150908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,3 +2245,4 @@ SceneRoots:
   - {fileID: 5691143523784498753}
   - {fileID: 2244751507501031628}
   - {fileID: 791733409}
+  - {fileID: 1960056991}
