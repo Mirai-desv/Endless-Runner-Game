@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
             groundCheck.position,
             checkRadius,
             groundLayer
-         ) != null;
+         ) != null && rb.linearVelocity.y <= 0.1f; // Thêm && rb.linearVelocity.y <= 0.1f
 
         if (!isRunning) return;
 
