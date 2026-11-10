@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 11f;
 
     [Header("Ground Check (include both Ground and Platform)")]
-    public Transform groundCheck;
     public LayerMask groundLayer;
     public float checkRadius = 0.15f;
 
@@ -233,11 +232,4 @@ public class PlayerController : MonoBehaviour
     }
 
     public float GetDistance() => transform.position.x;
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck == null) return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
-    }
 }

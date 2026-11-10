@@ -206,7 +206,7 @@ internal sealed class DiceRollScreen : FlowScreen
         dieBaseColor = die.color;
     }
 
-    /// <summary>Chạy hiệu ứng quay; gọi onDone(mặt cuối cùng) sau khi đã hiện kết quả.</summary>
+    // Chạy hiệu ứng quay; gọi onDone(mặt cuối cùng) sau khi đã hiện kết quả
     public void Play(int luckyNumber, int normalReward, Action<int> onDone)
     {
         flow.StartCoroutine(Run(luckyNumber, normalReward, onDone));
