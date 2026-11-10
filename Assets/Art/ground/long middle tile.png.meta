@@ -1,0 +1,266 @@
+fileFormatVersion: 2
+guid: cabcf61ba381cca4596cec468324516e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3941454507438092268
+    second: long middle tile_0
+  - first:
+      213: 8647536106500559838
+    second: long middle tile_1
+  - first:
+      213: 3945564542985045057
+    second: long middle tile_2
+  - first:
+      213: -5415898041853456343
+    second: long middle tile_3
+  - first:
+      213: 1172981749546849586
+    second: long middle tile_4
+  - first:
+      213: -4137992221714898155
+    second: long middle tile_5
+  - first:
+      213: -1334051634429974975
+    second: long middle tile_6
+  - first:
+      213: -6579166758302120245
+    second: long middle tile_7
+  - first:
+      213: 8073809719226247856
+    second: long middle tile_8
+  - first:
+      213: 1250815980216583878
+    second: long middle tile_9
+  - first:
+      213: -1080633368646539019
+    second: long middle tile_10
+  - first:
+      213: 7887259980494942709
+    second: long middle tile_11
+  - first:
+      213: -3043470540720808440
+    second: long middle tile_12
+  - first:
+      213: -8163824864797430029
+    second: long middle tile_13
+  - first:
+      213: 3205679011166026976
+    second: long middle tile_14
+  - first:
+      213: 1126965534944401898
+    second: long middle tile_15
+  - first:
+      213: -1279864238736882649
+    second: long middle tile_16
+  - first:
+      213: -3095476951280072699
+    second: long middle tile_17
+  - first:
+      213: -1334597711901375610
+    second: long middle tile_18
+  - first:
+      213: 2210137718625828910
+    second: long middle tile_19
+  - first:
+      213: -1482513007710213339
+    second: long middle tile_20
+  - first:
+      213: -245910139935254560
+    second: long middle tile_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: long middle tile_20
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 27
+        width: 4295
+        height: 961
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b6980364e0d6be0800000000000000
+      internalID: -1482513007710213339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f2e38ca799b1d214895c127fc29b21a0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      long middle tile_0: 3941454507438092268
+      long middle tile_1: 8647536106500559838
+      long middle tile_10: -1080633368646539019
+      long middle tile_11: 7887259980494942709
+      long middle tile_12: -3043470540720808440
+      long middle tile_13: -8163824864797430029
+      long middle tile_14: 3205679011166026976
+      long middle tile_15: 1126965534944401898
+      long middle tile_16: -1279864238736882649
+      long middle tile_17: -3095476951280072699
+      long middle tile_18: -1334597711901375610
+      long middle tile_19: 2210137718625828910
+      long middle tile_2: 3945564542985045057
+      long middle tile_20: -1482513007710213339
+      long middle tile_21: -245910139935254560
+      long middle tile_3: -5415898041853456343
+      long middle tile_4: 1172981749546849586
+      long middle tile_5: -4137992221714898155
+      long middle tile_6: -1334051634429974975
+      long middle tile_7: -6579166758302120245
+      long middle tile_8: 8073809719226247856
+      long middle tile_9: 1250815980216583878
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

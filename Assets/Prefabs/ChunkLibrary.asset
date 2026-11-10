@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkLibrary
   chunks:
   - {fileID: 11400000, guid: dc8b789926f60bd4b9ad296a8a258ee2, type: 2}
+  - {fileID: 11400000, guid: 74e838e807ee8c44b9325f11f65f0fd0, type: 2}

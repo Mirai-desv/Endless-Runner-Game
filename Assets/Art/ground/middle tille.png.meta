@@ -1,0 +1,594 @@
+fileFormatVersion: 2
+guid: 7fb83d4a708949b44909ed20f1050285
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5211221466193870494
+    second: middle tille_0
+  - first:
+      213: 2982154688313557437
+    second: middle tille_1
+  - first:
+      213: 5941731380985486262
+    second: middle tille_2
+  - first:
+      213: 2350916125793001893
+    second: middle tille_3
+  - first:
+      213: -7952493284255608111
+    second: middle tille_4
+  - first:
+      213: 2886551304661043999
+    second: middle tille_5
+  - first:
+      213: -6285974751560426334
+    second: middle tille_6
+  - first:
+      213: -2416661919008253673
+    second: middle tille_7
+  - first:
+      213: 8807784055182916497
+    second: middle tille_8
+  - first:
+      213: -4926655425842694473
+    second: middle tille_9
+  - first:
+      213: -7066878037188851522
+    second: middle tille_10
+  - first:
+      213: 8834417630152794774
+    second: middle tille_11
+  - first:
+      213: 2130002565162825425
+    second: middle tille_12
+  - first:
+      213: -2397280374692960197
+    second: middle tille_13
+  - first:
+      213: 6648348200601564372
+    second: middle tille_14
+  - first:
+      213: 2484519688952318660
+    second: middle tille_15
+  - first:
+      213: 8732351775110056155
+    second: middle tille_16
+  - first:
+      213: 4135549411294701242
+    second: middle tille_17
+  - first:
+      213: -5963341060638684868
+    second: middle tille_18
+  - first:
+      213: -4397881735880637850
+    second: middle tille_19
+  - first:
+      213: 3629420042775124887
+    second: middle tille_20
+  - first:
+      213: 3007884423002472439
+    second: middle tille_21
+  - first:
+      213: -3387765405386739566
+    second: middle tille_22
+  - first:
+      213: 8236770592314252557
+    second: middle tille_23
+  - first:
+      213: 3645678634755584885
+    second: middle tille_24
+  - first:
+      213: 6698055497328661959
+    second: middle tille_25
+  - first:
+      213: 5020618127459834802
+    second: middle tille_26
+  - first:
+      213: 1973448432803432338
+    second: middle tille_27
+  - first:
+      213: 1878949587645306148
+    second: middle tille_28
+  - first:
+      213: 8413896580085688528
+    second: middle tille_29
+  - first:
+      213: 6912150265647826441
+    second: middle tille_30
+  - first:
+      213: 1566344343957686883
+    second: middle tille_31
+  - first:
+      213: 5849167122614759228
+    second: middle tille_32
+  - first:
+      213: -8513945868708742977
+    second: middle tille_33
+  - first:
+      213: -7184222460037635749
+    second: middle tille_34
+  - first:
+      213: 4166438331037136369
+    second: middle tille_35
+  - first:
+      213: 7712518582354418573
+    second: middle tille_36
+  - first:
+      213: -580752649964338407
+    second: middle tille_37
+  - first:
+      213: -2803310833617565143
+    second: middle tille_38
+  - first:
+      213: -2829375711506980527
+    second: middle tille_39
+  - first:
+      213: -889555968867837850
+    second: middle tille_40
+  - first:
+      213: 8201763404621475262
+    second: middle tille_41
+  - first:
+      213: 2568135942520506144
+    second: middle tille_42
+  - first:
+      213: -7884238781545883172
+    second: middle tille_43
+  - first:
+      213: 9160729412091736107
+    second: middle tille_44
+  - first:
+      213: -5426467710852418476
+    second: middle tille_45
+  - first:
+      213: 5567267363704787605
+    second: middle tille_46
+  - first:
+      213: -1938400205918982769
+    second: middle tille_47
+  - first:
+      213: -100908094870210592
+    second: middle tille_48
+  - first:
+      213: -7487617509241816919
+    second: middle tille_49
+  - first:
+      213: 4627713786796344120
+    second: middle tille_50
+  - first:
+      213: 3026504741151340291
+    second: middle tille_51
+  - first:
+      213: 671598492883091301
+    second: middle tille_52
+  - first:
+      213: 7864328968722900830
+    second: middle tille_53
+  - first:
+      213: 6621664512417838195
+    second: middle tille_54
+  - first:
+      213: 1156374778070607651
+    second: middle tille_55
+  - first:
+      213: -9115610326832465348
+    second: middle tille_56
+  - first:
+      213: -4264024047921236858
+    second: middle tille_57
+  - first:
+      213: 9101972538742076923
+    second: middle tille_58
+  - first:
+      213: 9028570156479946455
+    second: middle tille_59
+  - first:
+      213: 4368483488809332020
+    second: middle tille_60
+  - first:
+      213: -125856661728134870
+    second: middle tille_61
+  - first:
+      213: -7616966466001714263
+    second: middle tille_62
+  - first:
+      213: -4838183345978823214
+    second: middle tille_63
+  - first:
+      213: 2191559981199043939
+    second: middle tille_64
+  - first:
+      213: 9095091561056705495
+    second: middle tille_65
+  - first:
+      213: 4506198658284722180
+    second: middle tille_66
+  - first:
+      213: 8763737961512029254
+    second: middle tille_67
+  - first:
+      213: 6941218057896237192
+    second: middle tille_68
+  - first:
+      213: -2341356392566742726
+    second: middle tille_69
+  - first:
+      213: -5810868489514127802
+    second: middle tille_70
+  - first:
+      213: 3533807011702331307
+    second: middle tille_71
+  - first:
+      213: -7982334485795500376
+    second: middle tille_72
+  - first:
+      213: 4399941040197940522
+    second: middle tille_73
+  - first:
+      213: 9152437706817723331
+    second: middle tille_74
+  - first:
+      213: 6057460737272093586
+    second: middle tille_75
+  - first:
+      213: -2292596039482609595
+    second: middle tille_76
+  - first:
+      213: 7780850994378570562
+    second: middle tille_77
+  - first:
+      213: -610259176829469913
+    second: middle tille_78
+  - first:
+      213: 7314383399225361113
+    second: middle tille_79
+  - first:
+      213: -1612349541322968882
+    second: middle tille_80
+  - first:
+      213: 3727229907896782966
+    second: middle tille_81
+  - first:
+      213: -6844463505794609437
+    second: middle tille_82
+  - first:
+      213: 7512363963936480749
+    second: middle tille_83
+  - first:
+      213: 5481412408735913939
+    second: middle tille_84
+  - first:
+      213: -819109412377641839
+    second: middle tille_85
+  - first:
+      213: -5509801734820732692
+    second: middle tille_86
+  - first:
+      213: 1803312686456911198
+    second: middle tille_87
+  - first:
+      213: -8772203179906841382
+    second: middle tille_88
+  - first:
+      213: -4065940269227337903
+    second: middle tille_89
+  - first:
+      213: 1081982033957152186
+    second: middle tille_90
+  - first:
+      213: -3080643269273435368
+    second: middle tille_91
+  - first:
+      213: 2020857137853761909
+    second: middle tille_92
+  - first:
+      213: -65922232947057071
+    second: middle tille_93
+  - first:
+      213: -5863228160820428603
+    second: middle tille_94
+  - first:
+      213: -1618396025755714054
+    second: middle tille_95
+  - first:
+      213: 1375661007877381770
+    second: middle tille_96
+  - first:
+      213: -2870616676113782933
+    second: middle tille_97
+  - first:
+      213: 9113900230336108237
+    second: middle tille_98
+  - first:
+      213: 1567589370031865161
+    second: middle tille_99
+  - first:
+      213: 7276613869222845715
+    second: middle tille_100
+  - first:
+      213: 3214650623633228766
+    second: middle tille_101
+  - first:
+      213: 4551473725829233838
+    second: middle tille_102
+  - first:
+      213: -3429855409269555719
+    second: middle tille_103
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: middle tille_2
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 28
+        width: 2483
+        height: 1052
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bb5e6ad535457250800000000000000
+      internalID: 5941731380985486262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d08a40567b645c048aa6605537ced6aa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      middle tille_0: -5211221466193870494
+      middle tille_1: 2982154688313557437
+      middle tille_10: -7066878037188851522
+      middle tille_100: 7276613869222845715
+      middle tille_101: 3214650623633228766
+      middle tille_102: 4551473725829233838
+      middle tille_103: -3429855409269555719
+      middle tille_11: 8834417630152794774
+      middle tille_12: 2130002565162825425
+      middle tille_13: -2397280374692960197
+      middle tille_14: 6648348200601564372
+      middle tille_15: 2484519688952318660
+      middle tille_16: 8732351775110056155
+      middle tille_17: 4135549411294701242
+      middle tille_18: -5963341060638684868
+      middle tille_19: -4397881735880637850
+      middle tille_2: 5941731380985486262
+      middle tille_20: 3629420042775124887
+      middle tille_21: 3007884423002472439
+      middle tille_22: -3387765405386739566
+      middle tille_23: 8236770592314252557
+      middle tille_24: 3645678634755584885
+      middle tille_25: 6698055497328661959
+      middle tille_26: 5020618127459834802
+      middle tille_27: 1973448432803432338
+      middle tille_28: 1878949587645306148
+      middle tille_29: 8413896580085688528
+      middle tille_3: 2350916125793001893
+      middle tille_30: 6912150265647826441
+      middle tille_31: 1566344343957686883
+      middle tille_32: 5849167122614759228
+      middle tille_33: -8513945868708742977
+      middle tille_34: -7184222460037635749
+      middle tille_35: 4166438331037136369
+      middle tille_36: 7712518582354418573
+      middle tille_37: -580752649964338407
+      middle tille_38: -2803310833617565143
+      middle tille_39: -2829375711506980527
+      middle tille_4: -7952493284255608111
+      middle tille_40: -889555968867837850
+      middle tille_41: 8201763404621475262
+      middle tille_42: 2568135942520506144
+      middle tille_43: -7884238781545883172
+      middle tille_44: 9160729412091736107
+      middle tille_45: -5426467710852418476
+      middle tille_46: 5567267363704787605
+      middle tille_47: -1938400205918982769
+      middle tille_48: -100908094870210592
+      middle tille_49: -7487617509241816919
+      middle tille_5: 2886551304661043999
+      middle tille_50: 4627713786796344120
+      middle tille_51: 3026504741151340291
+      middle tille_52: 671598492883091301
+      middle tille_53: 7864328968722900830
+      middle tille_54: 6621664512417838195
+      middle tille_55: 1156374778070607651
+      middle tille_56: -9115610326832465348
+      middle tille_57: -4264024047921236858
+      middle tille_58: 9101972538742076923
+      middle tille_59: 9028570156479946455
+      middle tille_6: -6285974751560426334
+      middle tille_60: 4368483488809332020
+      middle tille_61: -125856661728134870
+      middle tille_62: -7616966466001714263
+      middle tille_63: -4838183345978823214
+      middle tille_64: 2191559981199043939
+      middle tille_65: 9095091561056705495
+      middle tille_66: 4506198658284722180
+      middle tille_67: 8763737961512029254
+      middle tille_68: 6941218057896237192
+      middle tille_69: -2341356392566742726
+      middle tille_7: -2416661919008253673
+      middle tille_70: -5810868489514127802
+      middle tille_71: 3533807011702331307
+      middle tille_72: -7982334485795500376
+      middle tille_73: 4399941040197940522
+      middle tille_74: 9152437706817723331
+      middle tille_75: 6057460737272093586
+      middle tille_76: -2292596039482609595
+      middle tille_77: 7780850994378570562
+      middle tille_78: -610259176829469913
+      middle tille_79: 7314383399225361113
+      middle tille_8: 8807784055182916497
+      middle tille_80: -1612349541322968882
+      middle tille_81: 3727229907896782966
+      middle tille_82: -6844463505794609437
+      middle tille_83: 7512363963936480749
+      middle tille_84: 5481412408735913939
+      middle tille_85: -819109412377641839
+      middle tille_86: -5509801734820732692
+      middle tille_87: 1803312686456911198
+      middle tille_88: -8772203179906841382
+      middle tille_89: -4065940269227337903
+      middle tille_9: -4926655425842694473
+      middle tille_90: 1081982033957152186
+      middle tille_91: -3080643269273435368
+      middle tille_92: 2020857137853761909
+      middle tille_93: -65922232947057071
+      middle tille_94: -5863228160820428603
+      middle tille_95: -1618396025755714054
+      middle tille_96: 1375661007877381770
+      middle tille_97: -2870616676113782933
+      middle tille_98: 9113900230336108237
+      middle tille_99: 1567589370031865161
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

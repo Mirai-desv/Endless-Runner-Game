@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 898166a5d08a9174ea0076f56885eacd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4876077170626927889
+    second: groundtile (old)_0
+  - first:
+      213: -3657926097870826921
+    second: groundtile (old)_1
+  - first:
+      213: 9117990710521606051
+    second: groundtile (old)_2
+  - first:
+      213: -481885725347567512
+    second: groundtile (old)_3
+  - first:
+      213: 7963147147767575917
+    second: groundtile (old)_4
+  - first:
+      213: 2533120768119576490
+    second: groundtile (old)_5
+  - first:
+      213: 8474702514194045894
+    second: groundtile (old)_6
+  - first:
+      213: 3551341559293619379
+    second: groundtile (old)_7
+  - first:
+      213: -1229609067167086133
+    second: groundtile (old)_8
+  - first:
+      213: -8963318012286324320
+    second: groundtile (old)_9
+  - first:
+      213: -6133272805039681914
+    second: groundtile (old)_10
+  - first:
+      213: 3698477558325820997
+    second: groundtile (old)_11
+  - first:
+      213: -6871662521592690136
+    second: groundtile (old)_12
+  - first:
+      213: -271633510215229225
+    second: groundtile (old)_13
+  - first:
+      213: -6470148732491291824
+    second: groundtile (old)_14
+  - first:
+      213: 683172965065038763
+    second: groundtile (old)_15
+  - first:
+      213: -6007416392253462275
+    second: groundtile (old)_16
+  - first:
+      213: 8974653672831202363
+    second: groundtile (old)_17
+  - first:
+      213: -8232845136760047138
+    second: groundtile (old)_18
+  - first:
+      213: -7363331067431603769
+    second: groundtile (old)_19
+  - first:
+      213: -6587944879635891873
+    second: groundtile (old)_20
+  - first:
+      213: -82159666685431222
+    second: groundtile (old)_21
+  - first:
+      213: 5385852249482784179
+    second: groundtile (old)_22
+  - first:
+      213: -3361267767186336196
+    second: groundtile (old)_23
+  - first:
+      213: 3628323792619345351
+    second: groundtile (old)_24
+  - first:
+      213: -7028098657573745134
+    second: groundtile (old)_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: groundtile (old)_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 1453
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d1c942a5e4ba340800000000000000
+      internalID: 4876077170626927889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_1
+      rect:
+        serializedVersion: 2
+        x: 2118
+        y: 1465
+        width: 76
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75257c1389f6c3dc0800000000000000
+      internalID: -3657926097870826921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 591
+        width: 3717
+        height: 742
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3afa3f5fd3c998e70800000000000000
+      internalID: 9117990710521606051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_3
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1326
+        width: 30
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 868a3566c7fff49f0800000000000000
+      internalID: -481885725347567512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_4
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 1324
+        width: 27
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d65f9dce328c28e60800000000000000
+      internalID: 7963147147767575917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_5
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 1324
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa79ee4eae3772320800000000000000
+      internalID: 2533120768119576490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_6
+      rect:
+        serializedVersion: 2
+        x: 1855
+        y: 1323
+        width: 57
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cb55a729013c9570800000000000000
+      internalID: 8474702514194045894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_7
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 1319
+        width: 44
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc27c51556e84130800000000000000
+      internalID: 3551341559293619379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_8
+      rect:
+        serializedVersion: 2
+        x: 2370
+        y: 1328
+        width: 80
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc908e2711d8feee0800000000000000
+      internalID: -1229609067167086133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_9
+      rect:
+        serializedVersion: 2
+        x: 2522
+        y: 1330
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a130dce1c5eb9380800000000000000
+      internalID: -8963318012286324320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_10
+      rect:
+        serializedVersion: 2
+        x: 3574
+        y: 1333
+        width: 35
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68ecb0911ec32eaa0800000000000000
+      internalID: -6133272805039681914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_11
+      rect:
+        serializedVersion: 2
+        x: 3607
+        y: 1333
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54eb3c17eb1a35330800000000000000
+      internalID: 3698477558325820997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_12
+      rect:
+        serializedVersion: 2
+        x: 3617
+        y: 1324
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a4a102853f2a0a0800000000000000
+      internalID: -6871662521592690136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_13
+      rect:
+        serializedVersion: 2
+        x: 3625
+        y: 1329
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d0678af2c6fa3cf0800000000000000
+      internalID: -271633510215229225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_14
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1323
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 053a9e3120a6536a0800000000000000
+      internalID: -6470148732491291824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_15
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 1321
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bab1ade213e1b7900800000000000000
+      internalID: 683172965065038763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_16
+      rect:
+        serializedVersion: 2
+        x: 2055
+        y: 1321
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df8afd1be9e51aca0800000000000000
+      internalID: -6007416392253462275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_17
+      rect:
+        serializedVersion: 2
+        x: 3624
+        y: 1325
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b34324737ff5c8c70800000000000000
+      internalID: 8974653672831202363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_18
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1263
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed97d94b7fe0fbd80800000000000000
+      internalID: -8232845136760047138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_19
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 601
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c13422286130d990800000000000000
+      internalID: -7363331067431603769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_20
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 601
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f59f271590be294a0800000000000000
+      internalID: -6587944879635891873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_21
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 604
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a42b95ce73c1cdef0800000000000000
+      internalID: -82159666685431222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_22
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 601
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bde82fd5146eba40800000000000000
+      internalID: 5385852249482784179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_23
+      rect:
+        serializedVersion: 2
+        x: 1459
+        y: 598
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3653e546c06a51d0800000000000000
+      internalID: -3361267767186336196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_24
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 603
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c59c2504456a5230800000000000000
+      internalID: 3628323792619345351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groundtile (old)_25
+      rect:
+        serializedVersion: 2
+        x: 2434
+        y: 590
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21ecae4e18d277e90800000000000000
+      internalID: -7028098657573745134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      groundtile (old)_0: 4876077170626927889
+      groundtile (old)_1: -3657926097870826921
+      groundtile (old)_10: -6133272805039681914
+      groundtile (old)_11: 3698477558325820997
+      groundtile (old)_12: -6871662521592690136
+      groundtile (old)_13: -271633510215229225
+      groundtile (old)_14: -6470148732491291824
+      groundtile (old)_15: 683172965065038763
+      groundtile (old)_16: -6007416392253462275
+      groundtile (old)_17: 8974653672831202363
+      groundtile (old)_18: -8232845136760047138
+      groundtile (old)_19: -7363331067431603769
+      groundtile (old)_2: 9117990710521606051
+      groundtile (old)_20: -6587944879635891873
+      groundtile (old)_21: -82159666685431222
+      groundtile (old)_22: 5385852249482784179
+      groundtile (old)_23: -3361267767186336196
+      groundtile (old)_24: 3628323792619345351
+      groundtile (old)_25: -7028098657573745134
+      groundtile (old)_3: -481885725347567512
+      groundtile (old)_4: 7963147147767575917
+      groundtile (old)_5: 2533120768119576490
+      groundtile (old)_6: 8474702514194045894
+      groundtile (old)_7: 3551341559293619379
+      groundtile (old)_8: -1229609067167086133
+      groundtile (old)_9: -8963318012286324320
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
