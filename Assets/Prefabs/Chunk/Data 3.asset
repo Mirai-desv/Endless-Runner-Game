@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dad924af07e59444db9866d59bd0f4e3, type: 3}
-  m_Name: Data 2
+  m_Name: Data 3
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkData
-  prefab: {fileID: 0}
-  difficulty: 2
+  prefab: {fileID: 6836392418491857848, guid: 24bf52b3ae896614eb2c72d9b1503c5d, type: 3}
+  difficulty: 1
   tags:
-  - difficult
-  minSpeed: 3
-  maxSpeed: 10
-  weight: 2
+  - safe
+  minSpeed: 2
+  maxSpeed: 8
+  weight: 3
