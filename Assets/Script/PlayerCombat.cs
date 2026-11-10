@@ -1,9 +1,11 @@
-
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("References")]
     public EnergySystem energy;
+    public Animator animator;
+    public PlayerHitReceiver hitReceiver;
 
     [Header("Projectile")]
     public GameObject normalBullet;
@@ -14,18 +16,25 @@ public class PlayerCombat : MonoBehaviour
     {
         if (energy == null)
             energy = GetComponent<EnergySystem>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+
+        if (hitReceiver == null)
+            hitReceiver = GetComponent<PlayerHitReceiver>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
-        {
             Shoot();
-        }
     }
 
     public void Shoot()
     {
+        if (hitReceiver != null && hitReceiver.IsDead)
+            return;
+
         if (energy == null || firePoint == null)
             return;
 
@@ -37,10 +46,19 @@ public class PlayerCombat : MonoBehaviour
         GameObject prefab =
             isSpecial ? specialBullet : normalBullet;
 
-        if (prefab == null) return;
+        if (prefab == null)
+            return;
 
         if (!energy.UseEnergy(energy.shootCost))
             return;
+
+        // Phát animation tương ứng.
+        if (animator != null)
+        {
+            animator.SetTrigger(
+                isSpecial ? "ShootSpecial" : "Shoot"
+            );
+        }
 
         Instantiate(
             prefab,

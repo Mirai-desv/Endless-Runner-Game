@@ -1,52 +1,124 @@
-
 using UnityEngine;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class MagicProjectile : MonoBehaviour
 {
+    [Header("Movement")]
     public float speed = 12f;
-    public float lifetime = 3f;
+    public float lifetime = 4f;
+
+    [Header("Combat")]
+    public int damage = 1;
     public bool isSpecial = false;
+
+    private Rigidbody2D rb;
+    private Camera mainCamera;
+    private bool hasHit;
+
+    private readonly HashSet<EnemyHealth> hitEnemies = new();
+    private readonly HashSet<DestructibleObstacle> hitObstacles = new();
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.gravityScale = 0f;
+
+        GetComponent<Collider2D>().isTrigger = true;
+    }
 
     void Start()
     {
+        mainCamera = Camera.main;
         Destroy(gameObject, lifetime);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(
-            Vector3.right * speed * Time.deltaTime,
-            Space.World
+        rb.MovePosition(
+            rb.position + Vector2.right * speed * Time.fixedDeltaTime
         );
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void LateUpdate()
     {
-        // Không đụng vào Player
-        if (other.GetComponentInParent<EnergySystem>() != null)
+        // Đạn đặc biệt bay ra khỏi cạnh phải màn hình thì biến mất.
+        if (!isSpecial || mainCamera == null)
             return;
 
-        // Bỏ qua các vật phẩm trigger
+        Vector3 viewportPoint =
+            mainCamera.WorldToViewportPoint(transform.position);
+
+        if (viewportPoint.z > 0f && viewportPoint.x > 1.15f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasHit) return;
+
+        // Không bắn trúng Player.
+        if (other.GetComponentInParent<PlayerHitReceiver>() != null)
+            return;
+
+        // Bỏ qua vật phẩm.
         if (other.GetComponentInParent<MoonPickup>() != null ||
             other.GetComponentInParent<DicePickup>() != null)
             return;
 
-        DestructibleObstacle target =
+        // 1. Bắn trúng quái.
+        EnemyHealth enemy =
+            other.GetComponentInParent<EnemyHealth>();
+
+        if (enemy != null)
+        {
+            if (hitEnemies.Add(enemy))
+            {
+                enemy.TakeDamage(damage);
+
+                if (!isSpecial)
+                    DestroyBullet();
+            }
+
+            return;
+        }
+
+        // 2. Bắn trúng vật cản phá được.
+        DestructibleObstacle obstacle =
             other.GetComponentInParent<DestructibleObstacle>();
 
-        if (target != null)
+        if (obstacle != null)
         {
-            target.DestroyObstacle();
+            if (hitObstacles.Add(obstacle))
+            {
+                obstacle.TakeDamage(damage);
 
-            // Đạn thường biến mất sau khi trúng
-            // Đạn đặc biệt tiếp tục bay xuyên qua
-            if (!isSpecial)
-                Destroy(gameObject);
+                if (!isSpecial)
+                    DestroyBullet();
+            }
+
+            return;
         }
-        else if (!other.isTrigger)
+
+        // 3. Bắn trúng địa hình thường.
+        if (!other.isTrigger)
         {
-            // Va vào địa hình không phá được
-            Destroy(gameObject);
+            // Đạn thường bị chặn, đạn đặc biệt xuyên qua.
+            if (!isSpecial)
+                DestroyBullet();
         }
+    }
+
+    void DestroyBullet()
+    {
+        if (hasHit) return;
+
+        hasHit = true;
+        Destroy(gameObject);
     }
 }

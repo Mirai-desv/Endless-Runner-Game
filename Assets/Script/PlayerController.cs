@@ -24,6 +24,16 @@ public class PlayerController : MonoBehaviour
     private float coyoteRemaining;
     private float jumpBufferRemaining;
     private readonly RaycastHit2D[] groundHits = new RaycastHit2D[12];
+    private readonly ContactPoint2D[] groundContacts =
+    new ContactPoint2D[16];
+
+    [SerializeField] private bool debugGround = false;
+    [Header("Ground Detection")]
+    [SerializeField] private float groundCastDistance = 0.08f;
+    [SerializeField] private float groundNormalThreshold = 0.5f;
+
+    private readonly ContactPoint2D[] contacts =
+    new ContactPoint2D[16];
 
     public bool IsGrounded => isGrounded;
 
@@ -36,18 +46,60 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isRunning) return;
+        if (!isRunning)
+            return;
 
-        bool dropping = dropThrough != null && dropThrough.IsDropping;
-        isGrounded = !dropping && rb.linearVelocity.y <= 0.1f && CheckGround();
-        coyoteRemaining = dropping ? 0f : (isGrounded ? coyoteTime : Mathf.Max(0f, coyoteRemaining - Time.fixedDeltaTime));
+        bool dropping =
+            dropThrough != null && dropThrough.IsDropping;
+
+        bool groundDetected = CheckGround();
+
+        bool groundContact = HasGroundContact();
+        bool groundNearby = CheckGround();
+        bool fallingOrStanding = rb.linearVelocity.y <= 0.1f;
+
+        // Tiếp xúc thực tế được ưu tiên.
+        // Trong khi DropThrough, vẫn không nhận mặt đất
+        // nếu chưa có tiếp xúc hợp lệ.
+        isGrounded = fallingOrStanding &&
+            (groundContact || (!dropping && groundNearby));
+
+        bool previousGrounded = isGrounded;
+
+        if (previousGrounded != isGrounded)
+        {
+            Debug.Log(
+                $"[GROUND] {previousGrounded} -> {isGrounded} | " +
+                $"Detected={groundDetected} | " +
+                $"Dropping={dropping} | " +
+                $"VelocityY={rb.linearVelocity.y:F2}"
+            );
+        }
+
+        coyoteRemaining = dropping
+            ? 0f
+            : (isGrounded
+                ? coyoteTime
+                : Mathf.Max(
+                    0f,
+                    coyoteRemaining - Time.fixedDeltaTime
+                ));
 
         if (jumpBufferRemaining > 0f)
         {
-            jumpBufferRemaining = Mathf.Max(0f, jumpBufferRemaining - Time.fixedDeltaTime);
-            if (!dropping && (isGrounded || coyoteRemaining > 0f))
+            jumpBufferRemaining = Mathf.Max(
+                0f,
+                jumpBufferRemaining - Time.fixedDeltaTime
+            );
+
+            if (!dropping &&
+                (isGrounded || coyoteRemaining > 0f))
             {
-                rb.linearVelocity = new Vector2(runSpeed, jumpForce);
+                rb.linearVelocity = new Vector2(
+                    runSpeed,
+                    jumpForce
+                );
+
                 jumpBufferRemaining = 0f;
                 coyoteRemaining = 0f;
                 isGrounded = false;
@@ -55,38 +107,85 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        rb.linearVelocity = new Vector2(runSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(
+            runSpeed,
+            rb.linearVelocity.y
+        );
     }
 
     private bool CheckGround()
     {
-        // Keep the original GroundCheck method for compatibility with existing scenes.
-        if (groundCheck != null)
-        {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(groundCheck.position, checkRadius, groundLayer);
-            foreach (Collider2D hit in hits)
-            {
-                if (hit != null && !hit.isTrigger && hit != bodyCollider &&
-                    !hit.transform.IsChildOf(transform))
-                    return true;
-            }
-        }
+        if (bodyCollider == null)
+            return false;
 
-        // Fallback: check beneath the actual body collider (less sensitive to
-        // a misplaced GroundCheck, especially on a narrow platform edge).
-        if (bodyCollider == null) return false;
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(groundLayer);
         filter.useTriggers = false;
-        int count = bodyCollider.Cast(Vector2.down, filter, groundHits, 0.12f);
+
+        int count = bodyCollider.Cast(
+            Vector2.down,
+            filter,
+            groundHits,
+            groundCastDistance
+        );
+
         for (int i = 0; i < count; i++)
         {
             RaycastHit2D hit = groundHits[i];
-            if (hit.collider == null || hit.collider == bodyCollider ||
-                hit.collider.transform.IsChildOf(transform) || hit.normal.y < 0.5f)
+
+            if (hit.collider == null)
                 continue;
+
+            // Bỏ qua chính Player.
+            if (hit.collider.transform == transform ||
+                hit.collider.transform.IsChildOf(transform))
+                continue;
+
+            // Bỏ qua platform đang bị IgnoreCollision.
+            if (Physics2D.GetIgnoreCollision(
+                    bodyCollider,
+                    hit.collider))
+                continue;
+
+            // Chỉ nhận bề mặt có pháp tuyến hướng lên.
+            if (hit.normal.y < groundNormalThreshold)
+                continue;
+
             return true;
         }
+
+        return false;
+    }
+
+    private bool HasGroundContact()
+    {
+        int count = bodyCollider.GetContacts(contacts);
+
+        for (int i = 0; i < count; i++)
+        {
+            ContactPoint2D contact = contacts[i];
+
+            Collider2D other =
+                contact.collider == bodyCollider
+                    ? contact.otherCollider
+                    : contact.collider;
+
+            if (other == null || other.isTrigger)
+                continue;
+
+            if ((groundLayer.value & (1 << other.gameObject.layer)) == 0)
+                continue;
+
+            if (Physics2D.GetIgnoreCollision(bodyCollider, other))
+                continue;
+
+            // Xác nhận tiếp xúc từ phía dưới chân.
+            // Dựa vào vị trí tiếp xúc để tránh phụ thuộc
+            // vào chiều normal của từng collider.
+            if (contact.point.y <= bodyCollider.bounds.center.y)
+                return true;
+        }
+
         return false;
     }
 
