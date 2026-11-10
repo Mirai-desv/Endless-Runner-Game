@@ -31,6 +31,10 @@ namespace EndlessRunner.Run.World
         [Header("Pool")]
         [SerializeField, Min(0)] private int prewarmPerChunk = 1;
 
+        [Header("Player Spawn")]
+        [SerializeField] private float initialPlayerOffsetX;
+        [SerializeField] private float initialPlayerOffsetY;
+
         public event Action<ChunkView, ChunkData> ChunkSpawned;
         public event Action<ChunkView> ChunkRecycled;
 
@@ -62,7 +66,20 @@ namespace EndlessRunner.Run.World
 
             pool = new ChunkPool(poolRoot);
             rng = seed != 0 ? new System.Random(seed) : new System.Random();
-            lastExit = transform.position;
+            //lastExit = transform.position;
+
+            if (target != null && Camera.main != null)
+            {
+                Camera cam = Camera.main;
+
+                float halfWidth = cam.orthographicSize * cam.aspect;
+
+                lastExit = new Vector3(target.position.x - halfWidth, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                lastExit = transform.position;
+            }
 
             if (library != null)
                 foreach (var d in library.chunks)
@@ -113,6 +130,16 @@ namespace EndlessRunner.Run.World
 
             ChunkView view = pool.Get(data.prefab, activeRoot);
             view.AlignTo(lastExit);
+            
+            // Chỉ đặt vị trí Player khi sinh chunk đầu tiên
+            if (SpawnedCount == 0 && target != null)
+            {
+                Vector3 spawnPosition = target.position;
+                spawnPosition.x = view.EntryPoint.position.x + initialPlayerOffsetX;
+                spawnPosition.y = view.EntryPoint.position.y + initialPlayerOffsetY;
+                target.position = spawnPosition;
+            }
+
             lastExit = view.ExitPoint.position;
 
             active.Add(view);

@@ -1,9 +1,7 @@
 using UnityEngine;
 
-/// <summary>
-/// Vật phẩm xúc xắc đặt cố định trên đường. Player chạm vào -> mở màn quay xúc xắc (GameFlow).
-/// Quay trúng số may mắn (chọn ở đầu game) -> đầy thanh năng lượng, không trúng -> + normalReward.
-/// </summary>
+// Vật phẩm xúc xắc đặt cố định trên đường. Player chạm vào -> mở màn quay xúc xắc (GameFlow).
+// Quay trúng số may mắn (chọn ở đầu game) -> đầy thanh năng lượng, không trúng -> + normalReward.
 public class DicePickup : MonoBehaviour
 {
     [Tooltip("Chỉ dùng khi scene KHÔNG có GameFlow (không có màn chọn số). " +
