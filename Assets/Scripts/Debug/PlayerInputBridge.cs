@@ -53,6 +53,9 @@ namespace EndlessRunner.Run.Controls
         {
             if (player == null) return;
 
+            // Đang ở menu / chọn số may mắn / quay xúc xắc thì không nhận phím điều khiển.
+            if (GameFlow.InputLocked) return;
+
             bool jump = false;
             bool drop = false;
 

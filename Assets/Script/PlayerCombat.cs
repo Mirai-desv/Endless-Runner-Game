@@ -18,6 +18,8 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
+        if (GameFlow.InputLocked) return;
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             Shoot();
