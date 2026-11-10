@@ -31,10 +31,14 @@ namespace EndlessRunner.Run.World
         [Header("Pool")]
         [SerializeField, Min(0)] private int prewarmPerChunk = 1;
 
+        [Header("Player Spawn")]
+        [SerializeField] private float initialPlayerOffsetX;
+        [SerializeField] private float initialPlayerOffsetY;
+
         public event Action<ChunkView, ChunkData> ChunkSpawned;
         public event Action<ChunkView> ChunkRecycled;
 
-        /// <summary>Độ khó tối đa được phép bốc. Ngày 5 DifficultyManager sẽ gán giá trị này theo quãng đường.</summary>
+        // Độ khó tối đa được phép bốc. Ngày 5 DifficultyManager sẽ gán giá trị này theo quãng đường
         public int MaxDifficulty
         {
             get => maxDifficulty;
@@ -62,12 +66,37 @@ namespace EndlessRunner.Run.World
 
             pool = new ChunkPool(poolRoot);
             rng = seed != 0 ? new System.Random(seed) : new System.Random();
-            lastExit = transform.position;
+            //lastExit = transform.position;
+
+            if (target != null && Camera.main != null)
+            {
+                Camera cam = Camera.main;
+
+                float halfWidth = cam.orthographicSize * cam.aspect;
+
+                lastExit = new Vector3(target.position.x - halfWidth, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                lastExit = transform.position;
+            }
 
             if (library != null)
                 foreach (var d in library.chunks)
-                    if (d != null && d.prefab != null)
-                        pool.Prewarm(d.prefab, prewarmPerChunk);
+                {
+                    if (d == null || d.prefab == null) continue;
+
+                    // Chống đệ quy vô hạn: prefab chunk mà chứa chính ChunkGenerator thì mỗi lần Instantiate
+                    // lại chạy Awake() -> Prewarm() -> Instantiate() ... cho tới khi tràn stack.
+                    if (d.prefab.GetComponentInChildren<ChunkGenerator>(true) != null)
+                    {
+                        Debug.LogError($"ChunkGenerator: prefab '{d.prefab.name}' (trong ChunkData '{d.name}') đang chứa ChunkGenerator → " +
+                                       "sẽ đệ quy vô hạn. Hãy gỡ ChunkGenerator khỏi prefab chunk; chỉ đặt nó trên một GameObject riêng trong Scene.", d);
+                        continue;
+                    }
+
+                    pool.Prewarm(d.prefab, prewarmPerChunk);
+                }
         }
 
         private void Start()
@@ -88,7 +117,7 @@ namespace EndlessRunner.Run.World
             RecycleBehind();
         }
 
-        // ---------------------------------------------------------------- Sinh / thu hồi
+        // Sinh / thu hồi -----------------------------
 
         private bool SpawnNext()
         {
@@ -101,6 +130,16 @@ namespace EndlessRunner.Run.World
 
             ChunkView view = pool.Get(data.prefab, activeRoot);
             view.AlignTo(lastExit);
+            
+            // Chỉ đặt vị trí Player khi sinh chunk đầu tiên
+            if (SpawnedCount == 0 && target != null)
+            {
+                Vector3 spawnPosition = target.position;
+                spawnPosition.x = view.EntryPoint.position.x + initialPlayerOffsetX;
+                spawnPosition.y = view.EntryPoint.position.y + initialPlayerOffsetY;
+                target.position = spawnPosition;
+            }
+
             lastExit = view.ExitPoint.position;
 
             active.Add(view);
@@ -125,7 +164,7 @@ namespace EndlessRunner.Run.World
             }
         }
 
-        /// <summary>Xóa sạch chunk đang có và bắt đầu lại (dùng khi Retry).</summary>
+        // Xóa sạch chunk đang có và bắt đầu lại (dùng khi Retry)
         public void Restart(int newSeed = 0)
         {
             foreach (var v in active) pool.Release(v);

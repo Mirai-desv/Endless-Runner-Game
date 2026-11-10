@@ -2,11 +2,10 @@ using UnityEngine;
 
 namespace EndlessRunner.Run.World
 {
-    /// <summary>
     /// Gắn vào mỗi prefab vật cản. Người 1 có thể dùng component này để nhận biết "đã chạm vật cản".
     /// Trong Scene View, khung bao của vật cản hiện XANH nếu vượt được, ĐỎ nếu không vượt được
     /// (tính ở tốc độ chạy thấp nhất, dựa trên ChunkRules của chunk chứa nó).
-    /// </summary>
+
     [RequireComponent(typeof(Collider2D))]
     public class Obstacle : MonoBehaviour
     {

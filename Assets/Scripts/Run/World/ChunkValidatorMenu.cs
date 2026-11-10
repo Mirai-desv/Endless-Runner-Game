@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EndlessRunner.EditorTools
 {
-    /// <summary>Menu EndlessRunner > Validate All Chunks: kiểm tra mọi ChunkData trong project chỉ với một cú bấm.</summary>
+    // Menu EndlessRunner > Validate All Chunks: kiểm tra mọi ChunkData trong project chỉ với một cú bấm
     public static class ChunkValidatorMenu
     {
         [MenuItem("EndlessRunner/Validate All Chunks")]

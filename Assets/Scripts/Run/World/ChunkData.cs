@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace EndlessRunner.Run.World
 {
-    /// Metadata của một chunk. Mỗi chunk prefab có 1 asset ChunkData đi kèm.
+    // Metadata của một chunk. Mỗi chunk prefab có 1 asset ChunkData đi kèm.
     // ChunkGenerator sẽ đọc các asset này để chọn chunk theo độ khó.
     [CreateAssetMenu(menuName = "EndlessRunner/Chunk Data", fileName = "ChunkData_")]
     public class ChunkData : ScriptableObject
