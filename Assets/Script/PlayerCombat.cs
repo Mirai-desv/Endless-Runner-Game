@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -32,8 +33,12 @@ public class PlayerCombat : MonoBehaviour
             Shoot();
     }
 
+
     public void Shoot()
     {
+        if (GameFlow.InputLocked)
+            return;
+
         if (hitReceiver != null && hitReceiver.IsDead)
             return;
 
@@ -43,6 +48,7 @@ public class PlayerCombat : MonoBehaviour
         if (energy.currentEnergy < energy.shootCost)
             return;
 
+        // Xác định chế độ bắn trước khi trừ năng lượng
         bool isSpecial = energy.specialReady;
 
         GameObject prefab =
@@ -51,10 +57,10 @@ public class PlayerCombat : MonoBehaviour
         if (prefab == null)
             return;
 
+        // EnergySystem tự quản lý việc kết thúc Special Mode
         if (!energy.UseEnergy(energy.shootCost))
             return;
 
-        // Phát animation tương ứng.
         if (animator != null)
         {
             animator.SetTrigger(
@@ -67,8 +73,6 @@ public class PlayerCombat : MonoBehaviour
             firePoint.position,
             Quaternion.identity
         );
-
-        if (isSpecial)
-            energy.specialReady = false;
     }
+
 }

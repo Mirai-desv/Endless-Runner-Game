@@ -1,33 +1,30 @@
-using UnityEngine;
 
-// Điều khiển hành vi tấn công của quái
+using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
     public Animator animator;
+    public Transform player;
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-    [Header("Shooting")]
-    public float detectionRange = 6f;
-    public float shootCooldown = 1.5f;
+    [Header("Attack Settings")]
+    public float attackRange = 10f;
+    public float shootInterval = 2f;
 
-    [Header("Direction")]
-    public bool faceLeft = true;
+    private float timer;
+    private bool isAttacking;
 
-    private float nextShootTime;
-
-    void Start()
+    void Awake()
     {
         if (animator == null)
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
 
         if (player == null)
         {
-            PlayerHitReceiver target =
-                FindAnyObjectByType<PlayerHitReceiver>();
+            GameObject target =
+                GameObject.FindGameObjectWithTag("Player");
 
             if (target != null)
                 player = target.transform;
@@ -36,34 +33,55 @@ public class EnemyShooter : MonoBehaviour
 
     void Update()
     {
-        if (player == null ||
-            firePoint == null ||
-            bulletPrefab == null)
+        if (player == null || animator == null ||
+            bulletPrefab == null || firePoint == null)
             return;
 
-        if (Time.time < nextShootTime)
+        if (GameFlow.InputLocked)
             return;
 
-        Vector2 offset = player.position - transform.position;
-
-        bool inFront = faceLeft
-            ? offset.x < 0f
-            : offset.x > 0f;
-
-        if (!inFront)
+        if (isAttacking)
             return;
 
-        if (offset.magnitude > detectionRange)
+        float distance = Vector2.Distance(
+            transform.position,
+            player.position
+        );
+
+        float horizontalDistance =
+        transform.position.x - player.position.x;
+
+        // Player phải ở bên trái và trong tầm tấn công
+        if (horizontalDistance < 0f ||
+            horizontalDistance > attackRange)
             return;
 
-        Shoot();
-        nextShootTime = Time.time + shootCooldown;
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f)
+        {
+            StartAttack();
+        }
     }
 
-    void Shoot()
+    void StartAttack()
     {
-        if (animator != null)
-            animator.SetTrigger("Attack");
+        isAttacking = true;
+
+        animator.ResetTrigger("Attack");
+        animator.SetTrigger("Attack");
+
+        Debug.Log("[ENEMY] Start Attack");
+    }
+
+    // Gọi từ Animation Event tại frame bắn.
+
+    public void FireProjectile()
+    {
+        if (!isAttacking || bulletPrefab == null || firePoint == null)
+            return;
+
+        Debug.Log("[ENEMY] FireProjectile Event called!");
 
         GameObject bullet = Instantiate(
             bulletPrefab,
@@ -75,15 +93,29 @@ public class EnemyShooter : MonoBehaviour
             bullet.GetComponent<EnemyProjectile>();
 
         if (projectile != null)
-            projectile.SetDirection(faceLeft ? Vector2.left : Vector2.right);
+        {
+            // Luôn bắn thẳng về bên trái
+            projectile.SetDirection(Vector2.left);
+        }
+    }
+
+
+    // Gọi từ Animation Event cuối animation.
+    public void EndAttack()
+    {
+        isAttacking = false;
+        timer = shootInterval;
+
+        Debug.Log("[ENEMY] End Attack");
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
+
         Gizmos.DrawWireSphere(
             transform.position,
-            detectionRange
+            attackRange
         );
     }
 }

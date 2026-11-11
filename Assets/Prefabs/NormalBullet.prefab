@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5036814874667308817, guid: ac47ac56fc752ab44b74c90d2853ff5b, type: 3}
+  m_Sprite: {fileID: -5036814874667308817, guid: 0073abe468db82d4a8ce3dea2f3e559c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.03125, y: 0.01953125}
+  m_Size: {x: 2, y: 0.609375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776114a7b6bc9504aa3265d5282881e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicProjectile
-  speed: 12
-  lifetime: 3
+  speed: 15
+  lifetime: 5
   damage: 1
   isSpecial: 0
