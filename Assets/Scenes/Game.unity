@@ -2436,10 +2436,11 @@ GameObject:
   - component: {fileID: 1028025282}
   - component: {fileID: 1028025283}
   - component: {fileID: 1028025284}
-  - component: {fileID: 1028025285}
   - component: {fileID: 1028025287}
   - component: {fileID: 1028025289}
   - component: {fileID: 1028025288}
+  - component: {fileID: 1028025285}
+  - component: {fileID: 1028025290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2550,6 +2551,7 @@ Transform:
   m_Children:
   - {fileID: 2133150909}
   - {fileID: 983285506}
+  - {fileID: 1389821744}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1028025282
@@ -2614,12 +2616,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51dbdfd5da848a749a0d416b6886e810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  energy: {fileID: 0}
+  energy: {fileID: 1028025290}
   animator: {fileID: 0}
-  hitReceiver: {fileID: 0}
-  normalBullet: {fileID: 0}
-  specialBullet: {fileID: 0}
-  firePoint: {fileID: 0}
+  hitReceiver: {fileID: 1028025289}
+  normalBullet: {fileID: 5614028357441275714, guid: a470d268fa506f546a35fadec86d3123, type: 3}
+  specialBullet: {fileID: 5614028357441275714, guid: b012ed4f4e32be14baf358b1a16e525d, type: 3}
+  firePoint: {fileID: 1389821744}
 --- !u!114 &1028025287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2634,7 +2636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.Controls.PlayerInputBridge
   player: {fileID: 1028025277}
   playerCombat: {fileID: 1028025285}
-  jumpKeys: 010000003f000000
+  jumpKeys: 250000003f000000
   dropKeys: 2100000040000000
   skillKeys: 01000000
   logInput: 1
@@ -2670,6 +2672,23 @@ MonoBehaviour:
   onPlayerDead:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1028025290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028025276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc9fae7269bbc64594df1b6667005b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnergySystem
+  maxEnergy: 100
+  currentEnergy: 50
+  shootCost: 100
+  specialReady: 0
+  energySlider: {fileID: 0}
 --- !u!1 &1054871888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,6 +3188,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346608118}
   m_CullTransparentMesh: 1
+--- !u!1 &1389821743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389821744}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389821744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389821743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1028025281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1394259075
 GameObject:
   m_ObjectHideFlags: 0

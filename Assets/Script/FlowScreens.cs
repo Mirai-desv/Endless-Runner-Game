@@ -86,7 +86,7 @@ internal sealed class MenuScreen : FlowScreen
             tapText.color = c;
         }
 
-        // Chạm / click BẤT KỲ ĐÂU trên màn hình (hoặc Space / Enter khi test trên máy tính).
+        // Chạm / click BẤT KỲ ĐÂU trên màn hình (hoặc Enter khi test trên máy tính).
         if (FlowInput.PointerDown(out _) || FlowInput.ConfirmKeyDown())
             flow.OnTapToPlay();
     }
@@ -352,11 +352,11 @@ internal static class FlowInput
     {
 #if ENABLE_INPUT_SYSTEM
         Keyboard kb = Keyboard.current;
-        if (kb != null && (kb.spaceKey.wasPressedThisFrame || kb.enterKey.wasPressedThisFrame))
+        if (kb != null && kb.enterKey.wasPressedThisFrame)
             return true;
 #endif
 #if ENABLE_LEGACY_INPUT_MANAGER
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Space) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Return))
             return true;
 #endif
         return false;

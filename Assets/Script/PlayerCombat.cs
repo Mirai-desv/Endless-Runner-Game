@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (GameFlow.InputLocked) return;
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Space))
             Shoot();
     }
 

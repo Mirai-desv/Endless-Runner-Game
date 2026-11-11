@@ -38,8 +38,16 @@ namespace EndlessRunner.Run.Controls
             if (player == null)
                 player = GetComponent<PlayerController>();
 
+            if (playerCombat == null)
+                playerCombat = GetComponent<PlayerCombat>();
+
             if (player == null)
                 Debug.LogError("[PlayerInputBridge] Không tìm thấy PlayerController.", this);
+
+            if (playerCombat == null)
+                Debug.LogError("[PlayerInputBridge] Không tìm thấy PlayerCombat.", this);
+
+            ReserveSkillKeys();
         }
 
         // ------------------------------------------------------------------
@@ -73,7 +81,8 @@ namespace EndlessRunner.Run.Controls
 
         public void RequestSkill()
         {
-            if (!CanControl()) return;
+            if (!CanControl() || playerCombat == null) return;
+
             Log("Bắn");
             playerCombat.Shoot();
         }
@@ -100,6 +109,36 @@ namespace EndlessRunner.Run.Controls
         private bool CanControl()
         {
             return player != null && !GameFlow.InputLocked;
+        }
+
+        // Phím của Skill (Space) là phím riêng: tự loại khỏi Jump/Drop,
+        // kể cả khi dữ liệu cũ trong Scene vẫn còn gán trùng.
+        private void ReserveSkillKeys()
+        {
+            jumpKeys = RemoveReserved(jumpKeys, skillKeys, "Jump");
+            dropKeys = RemoveReserved(dropKeys, skillKeys, "Drop");
+        }
+
+        private Key[] RemoveReserved(Key[] source, Key[] reserved, string actionName)
+        {
+            if (source == null || reserved == null) return source;
+
+            var result = new System.Collections.Generic.List<Key>();
+
+            foreach (Key key in source)
+            {
+                if (System.Array.IndexOf(reserved, key) >= 0 && key != Key.None)
+                {
+                    Debug.LogWarning(
+                        $"[PlayerInputBridge] Phím {key} dành riêng cho Skill, đã bỏ khỏi {actionName}. " +
+                        "Hãy xoá nó trong Inspector để hết cảnh báo.", this);
+                    continue;
+                }
+
+                result.Add(key);
+            }
+
+            return result.ToArray();
         }
 
         // True nếu có bất kỳ phím nào trong danh sách vừa được bấm trong frame này
