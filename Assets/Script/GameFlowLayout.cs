@@ -41,6 +41,9 @@ public class GameFlowUIRefs
     public GameObject downButton;
     public GameObject skillButton;
 
+    [Header("Setting Panel")]
+    public GameObject SettingPanel;
+
     public bool IsComplete
     {
         get

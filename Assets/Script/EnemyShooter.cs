@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Điều khiển hành vi tấn công của quái
+
 public class EnemyShooter : MonoBehaviour
 {
     [Header("References")]

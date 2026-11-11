@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace EndlessRunner.Run.World
 {
-    /// <summary>
     /// Sinh chunk liên tục phía trước player, thu hồi chunk đã bị bỏ lại phía sau.
     /// Chọn chunk ngẫu nhiên có trọng số, theo độ khó cho phép, tránh lặp lại chunk vừa dùng.
-    /// </summary>
     public class ChunkGenerator : MonoBehaviour
     {
         [Header("Dữ liệu")]
