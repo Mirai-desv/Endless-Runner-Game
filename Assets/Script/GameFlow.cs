@@ -176,6 +176,15 @@ public class GameFlow : MonoBehaviour
         screens.menu.SetVisible(next == GameFlowState.Menu);
         screens.luckyPicker.SetVisible(next == GameFlowState.PickLuckyNumber);
         screens.diceRoll.SetVisible(next == GameFlowState.DiceRoll);
+
+        // Gameplay UI chỉ xuất hiện khi đang chơi
+        bool showGameplayUI = next == GameFlowState.Playing;
+
+        if (ui.scoreText != null) ui.scoreText.SetActive(showGameplayUI);
+        if (ui.energyBar != null) ui.energyBar.SetActive(showGameplayUI);
+        if (ui.upButton != null) ui.upButton.SetActive(showGameplayUI);
+        if (ui.downButton != null) ui.downButton.SetActive(showGameplayUI);
+        if (ui.skillButton != null) ui.skillButton.SetActive(showGameplayUI);
     }
 
     // Người chơi chạm màn hình ở menu -> sang chọn số may mắn

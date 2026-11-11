@@ -1,24 +1,32 @@
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
 
 namespace EndlessRunner.Run.Controls
 {
-    /// <summary>
-    /// Đọc phím và gọi PlayerController.Jump() / DropDown() (có sẵn, public).
-    /// Hoạt động với cả Input System mới lẫn Input Manager cũ, không phụ thuộc
-    /// cấu hình "Active Input Handling" trên máy.
-    /// Gắn vào GameObject Player. Không cần sửa file nào trong Assets/Script.
-    /// </summary>
+    /// Cửa duy nhất để điều khiển Player. PlayerController không tự đọc input.
+    ///
+    /// Có 2 nguồn input, cùng gọi chung các hàm RequestXxx():
+    ///   1. Bàn phím: đọc trong Update(), đổi phím ngay trong Inspector.
+    ///   2. Nút UI:   gán trong Inspector (Button > On Click, hoặc Event Trigger > Pointer Down)
+    ///                rồi chọn PlayerInputBridge > RequestJump / RequestDrop.
+    ///
+    /// Tất cả đều bị khóa khi GameFlow.InputLocked = true.
+
     [DisallowMultipleComponent]
     public class PlayerInputBridge : MonoBehaviour
     {
+        [Header("Tham chiếu")]
         [SerializeField] private PlayerController player;
-        [Tooltip("In log mỗi lần nhận phím và log cấu hình input lúc bắt đầu chơi")]
-        [SerializeField] private bool logInput = true;
+        [SerializeField] private PlayerCombat playerCombat;
 
-        private bool warnedNoKeyboard;
+        [Header("Phím điều khiển")]
+        [SerializeField] private Key[] jumpKeys = { Key.W, Key.UpArrow };
+        [SerializeField] private Key[] dropKeys = { Key.S, Key.DownArrow };
+        [SerializeField] private Key[] skillKeys = { Key.Space };
+
+        [Header("Debug")]
+        [Tooltip("In log mỗi lần nhận lệnh (từ phím hoặc từ nút).")]
+        [SerializeField] private bool logInput = false;
 
         private void Reset()
         {
@@ -27,70 +35,95 @@ namespace EndlessRunner.Run.Controls
 
         private void Awake()
         {
-            if (player == null) player = GetComponent<PlayerController>();
+            if (player == null)
+                player = GetComponent<PlayerController>();
+
+            if (player == null)
+                Debug.LogError("[PlayerInputBridge] Không tìm thấy PlayerController.", this);
         }
 
-        private void Start()
-        {
-            if (!logInput) return;
-
-            string newInput =
-#if ENABLE_INPUT_SYSTEM
-                "BẬT";
-#else
-                "TẮT";
-#endif
-            string oldInput =
-#if ENABLE_LEGACY_INPUT_MANAGER
-                "BẬT";
-#else
-                "TẮT";
-#endif
-            Debug.Log($"[PlayerInputBridge] Input System mới: {newInput} | Input Manager cũ: {oldInput} | player: {(player != null ? "OK" : "THIẾU")}", this);
-        }
-
+        // ------------------------------------------------------------------
+        // NGUỒN 1: BÀN PHÍM
+        // ------------------------------------------------------------------
         private void Update()
         {
-            if (player == null) return;
+            if (WasPressed(jumpKeys)) RequestJump();
+            if (WasPressed(dropKeys)) RequestDrop();
+            if (WasPressed(skillKeys)) RequestSkill();
+        }
 
-            // Đang ở menu / chọn số may mắn / quay xúc xắc thì không nhận phím điều khiển.
-            if (GameFlow.InputLocked) return;
+        // ------------------------------------------------------------------
+        // NGUỒN 2: NÚT UI (gọi các hàm public này từ Inspector)
+        // ------------------------------------------------------------------
+        public void RequestJump()
+        {
+            if (!CanControl()) return;
 
-            bool jump = false;
-            bool drop = false;
+            Log("Nhảy");
+            player.Jump();
+        }
 
-#if ENABLE_INPUT_SYSTEM
-            Keyboard kb = Keyboard.current;
-            if (kb != null)
+        public void RequestDrop()
+        {
+            if (!CanControl()) return;
+
+            Log("Xuống");
+            player.DropDown();
+        }
+
+        public void RequestSkill()
+        {
+            if (!CanControl()) return;
+            Log("Bắn");
+            playerCombat.Shoot();
+        }
+
+        // THÊM HÀNH ĐỘNG MỚI (ví dụ lướt), làm 3 việc:
+        //   1. Viết hàm Dash() public trong PlayerController.
+        //   2. Thêm hàm ở đây:
+        //        public void RequestDash()
+        //        {
+        //            if (!CanControl()) return;
+        //            Log("Lướt");
+        //            player.Dash();
+        //        }
+        //   3. Khai báo phím (nếu cần) và thêm một dòng trong Update():
+        //        [SerializeField] private Key[] dashKeys = { Key.LeftShift };
+        //        if (WasPressed(dashKeys)) RequestDash();
+        //   Muốn có nút UI cho Dash: gán RequestDash vào Button trong Inspector.
+
+        // ------------------------------------------------------------------
+        // HÀM PHỤ
+        // ------------------------------------------------------------------
+
+        // Player có đang được phép nhận lệnh không (menu, chọn số, xúc xắc thì không)
+        private bool CanControl()
+        {
+            return player != null && !GameFlow.InputLocked;
+        }
+
+        // True nếu có bất kỳ phím nào trong danh sách vừa được bấm trong frame này
+        private static bool WasPressed(Key[] keys)
+        {
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard == null || keys == null) return false;
+
+            foreach (Key key in keys)
             {
-                jump |= kb.spaceKey.wasPressedThisFrame || kb.upArrowKey.wasPressedThisFrame;
-                drop |= kb.downArrowKey.wasPressedThisFrame || kb.sKey.wasPressedThisFrame;
-            }
-            else if (logInput && !warnedNoKeyboard)
-            {
-                warnedNoKeyboard = true;
-                Debug.LogWarning("[PlayerInputBridge] Keyboard.current = null: Unity chưa nhận bàn phím (Game view chưa focus, hoặc bộ gõ/IME đang chặn phím).", this);
-            }
-#endif
+                // Key.None là giá trị mặc định khi thêm ô mới trong Inspector, bỏ qua.
+                if (key == Key.None) continue;
 
-#if ENABLE_LEGACY_INPUT_MANAGER
-            jump |= UnityEngine.Input.GetKeyDown(KeyCode.Space) || UnityEngine.Input.GetKeyDown(KeyCode.UpArrow);
-            drop |= UnityEngine.Input.GetKeyDown(KeyCode.DownArrow) || UnityEngine.Input.GetKeyDown(KeyCode.S);
-#endif
-
-            // Jump() và DropDown() tự kiểm tra isGrounded / isDropping,
-            // nên gọi trùng với PlayerController trong cùng frame cũng không sao.
-            if (jump)
-            {
-                if (logInput) Debug.Log("[PlayerInputBridge] Nhận phím NHẢY", this);
-                player.Jump();
+                if (keyboard[key].wasPressedThisFrame)
+                    return true;
             }
 
-            if (drop)
-            {
-                if (logInput) Debug.Log("[PlayerInputBridge] Nhận phím XUỐNG", this);
-                player.DropDown();
-            }
+            return false;
+        }
+
+        private void Log(string action)
+        {
+            if (logInput)
+                Debug.Log($"[PlayerInputBridge] {action}", this);
         }
     }
 }

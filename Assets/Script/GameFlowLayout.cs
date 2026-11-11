@@ -34,6 +34,13 @@ public class GameFlowUIRefs
     [Tooltip("Không bắt buộc. Chữ kết quả (FULL ENERGY! / +25 ENERGY).")]
     public TextMeshProUGUI rollResult;
 
+    [Header("4. Gameplay UI")]
+    public GameObject scoreText;
+    public GameObject energyBar;
+    public GameObject upButton;
+    public GameObject downButton;
+    public GameObject skillButton;
+
     public bool IsComplete
     {
         get
