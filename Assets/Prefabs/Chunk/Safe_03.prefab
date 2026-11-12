@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 4472604222736369071}
   - component: {fileID: 1850097416149416014}
   - component: {fileID: 601927563811435831}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Platform_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2387673121740089235}
   - component: {fileID: 3560503807211460560}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

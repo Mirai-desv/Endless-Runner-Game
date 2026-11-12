@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7ef9e5df611154d4ca502ebe11c6bc26
+guid: 7abc0370fe1e9e7489555ea10ec90493
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9083969447635318612
-    second: moon_0
+      213: 4799661656225657275
+    second: moon 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: moon_0
+      name: moon 1_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 15
         y: 0
-        width: 32
-        height: 32
+        width: 497
+        height: 511
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 457fdcc651eb01e70800000000000000
-      internalID: 9083969447635318612
+      spriteID: bb1b46db8d2db9240800000000000000
+      internalID: 4799661656225657275
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      moon_0: 9083969447635318612
+      moon 1_0: 4799661656225657275
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
