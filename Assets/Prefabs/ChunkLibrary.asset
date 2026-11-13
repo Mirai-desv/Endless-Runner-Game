@@ -14,4 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkLibrary
   chunks:
   - {fileID: 11400000, guid: dc8b789926f60bd4b9ad296a8a258ee2, type: 2}
+  - {fileID: 11400000, guid: e32cb221576dc724b9e181ac1418539e, type: 2}
   - {fileID: 11400000, guid: 4c70969a04a98ab4593d711261cc5ee2, type: 2}
+  - {fileID: 11400000, guid: 0a4612c58203bfe438dcfa59bf1f7dcf, type: 2}
+  - {fileID: 11400000, guid: 74e838e807ee8c44b9325f11f65f0fd0, type: 2}
+  - {fileID: 11400000, guid: cc4e07ba8df4a1140a1f4d5f4b5f8c08, type: 2}
+  - {fileID: 11400000, guid: eb37a91550479574e90ec8e19f52de40, type: 2}
+  - {fileID: 11400000, guid: a4545f14b99879941984a7ce8195fc50, type: 2}
+  - {fileID: 11400000, guid: 1132785bf00cd414a9417e670f2dc8fd, type: 2}
+  - {fileID: 11400000, guid: bf92b488cdd58c34e99acd11efbb54d8, type: 2}
+  - {fileID: 11400000, guid: f834f2144af4b3340af4f1c6975376a7, type: 2}
+  - {fileID: 11400000, guid: a7e8edad27ae02147bd40b538fafb2cc, type: 2}
+  - {fileID: 11400000, guid: 915a4d64cc89589488ef0fed7efab333, type: 2}
+  - {fileID: 11400000, guid: 72fbc9145b3a389489499c82c1ebfa00, type: 2}

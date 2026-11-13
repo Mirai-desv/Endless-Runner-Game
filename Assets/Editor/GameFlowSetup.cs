@@ -3,11 +3,9 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-/// <summary>
 /// Menu Tools > Endless Runner > Create Game Flow UI in Scene.
 /// Tạo sẵn trong scene hiện tại: Canvas "GameFlowUI" (3 panel) + object "GameFlow" đã nối đủ tham chiếu,
 /// và xuất 6 ảnh xúc xắc ra Assets/Art/DiceFaces để bạn thay bằng ảnh của mình.
-/// </summary>
 public static class GameFlowSetup
 {
     private const string FacesFolder = "Assets/Art/DiceFaces";

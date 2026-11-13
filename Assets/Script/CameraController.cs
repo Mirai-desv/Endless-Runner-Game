@@ -7,12 +7,12 @@ public class CameraController : MonoBehaviour
     public float offsetX = 3f;
     public float smoothSpeed = 5f;
 
-    private float fixedY;
+    public float fixedY;
     private float fixedZ;
 
     void Start()
     {
-        fixedY = transform.position.y;
+        //fixedY = transform.position.y;
         fixedZ = transform.position.z;
     }
 

@@ -3,12 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Các object UI mà GameFlow cần. Kéo thả trong Inspector (hoặc để menu
-/// Tools > Endless Runner > Create Game Flow UI in Scene tự điền).
-/// Bạn có thể tự do đổi vị trí, kích thước, ảnh, font, màu của các object này;
-/// chỉ cần giữ đúng các tham chiếu bên dưới.
-/// </summary>
+// Các object UI mà GameFlow cần. Kéo thả trong Inspector (hoặc để menu
+// Tools > Endless Runner > Create Game Flow UI in Scene tự điền).
+// Bạn có thể tự do đổi vị trí, kích thước, ảnh, font, màu của các object này;
+// chỉ cần giữ đúng các tham chiếu bên dưới.
 [Serializable]
 public class GameFlowUIRefs
 {
@@ -36,6 +34,16 @@ public class GameFlowUIRefs
     [Tooltip("Không bắt buộc. Chữ kết quả (FULL ENERGY! / +25 ENERGY).")]
     public TextMeshProUGUI rollResult;
 
+    [Header("4. Gameplay UI")]
+    public GameObject scoreText;
+    public GameObject energyBar;
+    public GameObject upButton;
+    public GameObject downButton;
+    public GameObject skillButton;
+
+    [Header("Setting Panel")]
+    public GameObject SettingPanel;
+
     public bool IsComplete
     {
         get
@@ -49,10 +57,10 @@ public class GameFlowUIRefs
     }
 }
 
-/// <summary>
-/// Dựng bố cục mặc định của 3 màn. Dùng cho (a) menu Editor để tạo UI trong scene,
-/// (b) dự phòng lúc chạy nếu scene chưa có UI.
-/// </summary>
+
+// Dựng bố cục mặc định của 3 màn. Dùng cho (a) menu Editor để tạo UI trong scene,
+// (b) dự phòng lúc chạy nếu scene chưa có UI.
+
 public static class GameFlowLayout
 {
     private static readonly Color Gold = new Color(1f, 0.85f, 0.25f);
@@ -74,7 +82,7 @@ public static class GameFlowLayout
         return canvasGo;
     }
 
-    /// <summary>Tạo 3 panel dưới canvasRoot và trả về các tham chiếu. Sprite xúc xắc lấy từ DiceFaces.Get.</summary>
+    // Tạo 3 panel dưới canvasRoot và trả về các tham chiếu. Sprite xúc xắc lấy từ DiceFaces.Get
     public static GameFlowUIRefs Build(Transform canvasRoot, string gameTitle, string tapToPlay)
     {
         GameFlowUIRefs ui = new GameFlowUIRefs();
@@ -167,7 +175,7 @@ public static class FlowUI
         rt.offsetMax = Vector2.zero;
     }
 
-    /// <summary>Đặt rect theo điểm neo (0..1 theo màn hình), kích thước và độ lệch (pixel theo canvas).</summary>
+    // Đặt rect theo điểm neo (0..1 theo màn hình), kích thước và độ lệch (pixel theo canvas)
     public static void Anchor(RectTransform rt, Vector2 anchor, Vector2 size, Vector2 offset = default)
     {
         rt.anchorMin = anchor;
@@ -205,7 +213,6 @@ public static class FlowUI
     }
 }
 
-/// <summary>Sinh 6 mặt xúc xắc bằng code (tông tím giống Dice.png), dùng khi bạn chưa có ảnh riêng.</summary>
 public static class DiceFaces
 {
     private const int Size = 256;
@@ -215,16 +222,12 @@ public static class DiceFaces
     private static readonly Sprite[] resourceSprites = new Sprite[6];
     private static readonly bool[] resourceTried = new bool[6];
 
-    /// <summary>GameFlow truyền 6 sprite người dùng chọn (có thể null / có ô null).</summary>
+    // GameFlow truyền 6 sprite người dùng chọn (có thể null / có ô null)
     public static void SetInspectorSprites(Sprite[] sprites)
     {
         inspectorSprites = sprites;
     }
 
-    /// <summary>
-    /// Thứ tự ưu tiên: sprite người dùng chọn (Inspector hoặc ảnh trên ô chọn số)
-    /// -> Resources/DiceFaces/dice_N -> ảnh tự sinh bằng code.
-    /// </summary>
     public static Sprite Get(int face)
     {
         int i = Mathf.Clamp(face, 1, 6) - 1;
@@ -247,7 +250,7 @@ public static class DiceFaces
         return cache[i];
     }
 
-    /// <summary>Vẽ texture 256x256 của 1 mặt xúc xắc. readable = true nếu cần EncodeToPNG (Editor).</summary>
+    // Vẽ texture 256x256 của 1 mặt xúc xắc. readable = true nếu cần EncodeToPNG (Editor)
     public static Texture2D BuildTexture(int face, bool readable)
     {
         Texture2D tex = new Texture2D(Size, Size, TextureFormat.RGBA32, false)

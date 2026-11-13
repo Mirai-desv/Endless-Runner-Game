@@ -29,7 +29,7 @@ public class ScoreTracker : MonoBehaviour
 
         if (scoreText != null)
         {
-            scoreText.text = "" + Score;
+            scoreText.text = "points: " + Score;
         }
     }
 }

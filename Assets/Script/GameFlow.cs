@@ -10,27 +10,24 @@ public enum GameFlowState
     DiceRoll         // Đang quay xúc xắc (game tạm dừng)
 }
 
-/// <summary>
-/// Điều phối luồng: Tap to play -> chọn số may mắn -> chơi -> (chạm Dice) quay xúc xắc -> chơi tiếp.
-///
-/// Cách dùng khuyên dùng: menu Tools > Endless Runner > Create Game Flow UI in Scene
-/// -> sinh ra Canvas "GameFlowUI" + object "GameFlow" đã nối sẵn. Sau đó chỉnh UI thoải mái trong Unity.
-/// Nếu scene KHÔNG có GameFlow, component này vẫn tự được tạo khi scene có PlayerController
-/// và dựng UI mặc định bằng code (xem Bootstrap) nên game vẫn chạy bình thường.
-/// </summary>
+// Điều phối luồng: Tap to play -> chọn số may mắn -> chơi -> (chạm Dice) quay xúc xắc -> chơi tiếp.
+// Cách dùng khuyên dùng: menu Tools > Endless Runner > Create Game Flow UI in Scene
+// -> sinh ra Canvas "GameFlowUI" + object "GameFlow" đã nối sẵn. Sau đó chỉnh UI thoải mái trong Unity.
+// Nếu scene KHÔNG có GameFlow, component này vẫn tự được tạo khi scene có PlayerController
+// và dựng UI mặc định bằng code (xem Bootstrap) nên game vẫn chạy bình thường.
+
 [DisallowMultipleComponent]
 public class GameFlow : MonoBehaviour
 {
     public static GameFlow Instance { get; private set; }
 
-    /// <summary>
-    /// True khi người chơi chưa được điều khiển nhân vật (menu, chọn số, quay xúc xắc).
-    /// Các script input (PlayerInputBridge, PlayerCombat) kiểm tra cờ này.
-    /// Khóa thêm 1 frame sau khi vào Playing để cú chạm "Tap to play" không bị tính là cú nhảy.
-    /// </summary>
+    // True khi người chơi chưa được điều khiển nhân vật (menu, chọn số, quay xúc xắc).
+    // Các script input (PlayerInputBridge, PlayerCombat) kiểm tra cờ này.
+    // Khóa thêm 1 frame sau khi vào Playing để cú chạm "Tap to play" không bị tính là cú nhảy.
     public static bool InputLocked =>
-        Instance != null &&
-        (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame);
+        SettingsPanel.IsOpen ||
+        (Instance != null &&
+        (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame));
 
     [Header("UI (object thật trong scene - chỉnh thoải mái trong Unity)")]
     [Tooltip("Tạo sẵn bằng menu Tools > Endless Runner > Create Game Flow UI in Scene. " +
@@ -72,7 +69,7 @@ public class GameFlow : MonoBehaviour
 
     public GameFlowState State { get; private set; } = GameFlowState.Menu;
 
-    /// <summary>Số may mắn người chơi chọn ở đầu game (1-6). 0 = chưa chọn.</summary>
+    // Số may mắn người chơi chọn ở đầu game (1-6). 0 = chưa chọn
     public int LuckyNumber { get; private set; }
 
     private int unlockFrame;
@@ -180,16 +177,25 @@ public class GameFlow : MonoBehaviour
         screens.menu.SetVisible(next == GameFlowState.Menu);
         screens.luckyPicker.SetVisible(next == GameFlowState.PickLuckyNumber);
         screens.diceRoll.SetVisible(next == GameFlowState.DiceRoll);
+
+        // Gameplay UI chỉ xuất hiện khi đang chơi
+        bool showGameplayUI = next == GameFlowState.Playing;
+
+        if (ui.scoreText != null) ui.scoreText.SetActive(showGameplayUI);
+        if (ui.energyBar != null) ui.energyBar.SetActive(showGameplayUI);
+        if (ui.upButton != null) ui.upButton.SetActive(showGameplayUI);
+        if (ui.downButton != null) ui.downButton.SetActive(showGameplayUI);
+        if (ui.skillButton != null) ui.skillButton.SetActive(showGameplayUI);
     }
 
-    /// <summary>Người chơi chạm màn hình ở menu -> sang chọn số may mắn.</summary>
+    // Người chơi chạm màn hình ở menu -> sang chọn số may mắn
     internal void OnTapToPlay()
     {
         if (State != GameFlowState.Menu) return;
         SetState(GameFlowState.PickLuckyNumber);
     }
 
-    /// <summary>Người chơi chọn xong số may mắn -> bắt đầu chạy.</summary>
+    // Người chơi chọn xong số may mắn -> bắt đầu chạy
     internal void OnLuckyNumberChosen(int number)
     {
         if (State != GameFlowState.PickLuckyNumber) return;
@@ -199,11 +205,9 @@ public class GameFlow : MonoBehaviour
         SetState(GameFlowState.Playing);
     }
 
-    /// <summary>
     /// Mở màn hình quay xúc xắc, tạm dừng game. Khi dừng hẳn sẽ gọi onFinished(mặt cuối cùng)
     /// rồi game chạy tiếp. normalReward chỉ dùng để hiện chữ "+N ENERGY" khi không trúng.
     /// Trả về false nếu không mở được (chưa vào game / đang quay).
-    /// </summary>
     public bool StartDiceRoll(int normalReward, Action<int> onFinished)
     {
         if (State != GameFlowState.Playing) return false;
