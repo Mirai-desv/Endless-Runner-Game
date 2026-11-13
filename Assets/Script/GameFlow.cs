@@ -25,9 +25,7 @@ public class GameFlow : MonoBehaviour
     // Các script input (PlayerInputBridge, PlayerCombat) kiểm tra cờ này.
     // Khóa thêm 1 frame sau khi vào Playing để cú chạm "Tap to play" không bị tính là cú nhảy.
     public static bool InputLocked =>
-        SettingsPanel.IsOpen ||
-        (Instance != null &&
-        (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame));
+        (SettingsPanel.IsOpen || Instance != null && (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame));
 
     [Header("UI (object thật trong scene - chỉnh thoải mái trong Unity)")]
     [Tooltip("Tạo sẵn bằng menu Tools > Endless Runner > Create Game Flow UI in Scene. " +
@@ -58,6 +56,7 @@ public class GameFlow : MonoBehaviour
     [Min(0f)] public float resultHoldTime = 1.5f;
 
     [Header("Dice roll - chữ & màu hiển thị")]
+
     public string rollingText = "ROLLING...";
     public string luckyTitleText = "LUCKY!";
     public string luckyResultText = "FULL ENERGY!";
@@ -66,6 +65,14 @@ public class GameFlow : MonoBehaviour
     public string notLuckyResultFormat = "+{0} ENERGY";
     public Color luckyColor = new Color(1f, 0.85f, 0.25f);
     public Color normalColor = Color.white;
+
+    [Header("Tutorial Mode")]
+    public bool tutorialMode = false;
+
+    public event Action<int> OnTutorialLuckyNumberChosen;
+
+    private bool tutorialPickingNumber;
+    private float timeScaleBeforeTutorialPick = 1f;
 
     public GameFlowState State { get; private set; } = GameFlowState.Menu;
 
@@ -89,8 +96,8 @@ public class GameFlow : MonoBehaviour
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (FindFirstObjectByType<PlayerController>() == null) return; // không phải scene chơi
-        if (FindFirstObjectByType<GameFlow>() != null) return;         // đã có sẵn trong scene
+        if (FindAnyObjectByType<PlayerController>() == null) return; // không phải scene chơi
+        if (FindAnyObjectByType<GameFlow>() != null) return;         // đã có sẵn trong scene
 
         new GameObject("GameFlow").AddComponent<GameFlow>();
     }
@@ -148,8 +155,16 @@ public class GameFlow : MonoBehaviour
         if (Instance != this || started) return;
         started = true;
 
-        Time.timeScale = 0f;
-        SetState(GameFlowState.Menu);
+        if (tutorialMode)
+        {
+            Time.timeScale = 1f;
+            SetState(GameFlowState.Playing);
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            SetState(GameFlowState.Menu);
+        }
     }
 
     private void OnDestroy()
@@ -186,6 +201,7 @@ public class GameFlow : MonoBehaviour
         if (ui.upButton != null) ui.upButton.SetActive(showGameplayUI);
         if (ui.downButton != null) ui.downButton.SetActive(showGameplayUI);
         if (ui.skillButton != null) ui.skillButton.SetActive(showGameplayUI);
+        if(ui.settingButton != null) ui.settingButton.SetActive(showGameplayUI);
     }
 
     // Người chơi chạm màn hình ở menu -> sang chọn số may mắn
@@ -201,6 +217,18 @@ public class GameFlow : MonoBehaviour
         if (State != GameFlowState.PickLuckyNumber) return;
 
         LuckyNumber = Mathf.Clamp(number, 1, 6);
+
+        if (tutorialMode && tutorialPickingNumber)
+        {
+            tutorialPickingNumber = false;
+
+            Time.timeScale = timeScaleBeforeTutorialPick;
+            SetState(GameFlowState.Playing);
+
+            OnTutorialLuckyNumberChosen?.Invoke(LuckyNumber);
+            return;
+        }
+
         Time.timeScale = 1f;
         SetState(GameFlowState.Playing);
     }
@@ -221,10 +249,31 @@ public class GameFlow : MonoBehaviour
             normalReward,
             result =>
             {
-                onFinished?.Invoke(result);
                 Time.timeScale = timeScaleBeforeRoll;
                 SetState(GameFlowState.Playing);
+                onFinished?.Invoke(result);
             });
         return true;
     }
+
+    public bool OpenTutorialLuckyPicker()
+    {
+        if (!tutorialMode)
+            return false;
+
+        if (State != GameFlowState.Playing)
+            return false;
+
+        tutorialPickingNumber = true;
+
+        timeScaleBeforeTutorialPick =
+            Time.timeScale > 0f ? Time.timeScale : 1f;
+
+        Time.timeScale = 0f;
+
+        SetState(GameFlowState.PickLuckyNumber);
+
+        return true;
+    }
+
 }

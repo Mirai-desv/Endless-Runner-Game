@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Quản lý vòng đời đạn do quái sinh ra
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class EnemyProjectile : MonoBehaviour

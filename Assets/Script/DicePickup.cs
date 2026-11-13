@@ -1,11 +1,8 @@
+
 using UnityEngine;
 
-// Vật phẩm xúc xắc đặt cố định trên đường. Player chạm vào -> mở màn quay xúc xắc (GameFlow).
-// Quay trúng số may mắn (chọn ở đầu game) -> đầy thanh năng lượng, không trúng -> + normalReward.
 public class DicePickup : MonoBehaviour
 {
-    [Tooltip("Chỉ dùng khi scene KHÔNG có GameFlow (không có màn chọn số). " +
-             "Bình thường số may mắn do người chơi chọn ở đầu game.")]
     [Range(1, 6)]
     public int luckyNumber = 4;
 
@@ -17,39 +14,110 @@ public class DicePickup : MonoBehaviour
     {
         if (triggered) return;
 
-        EnergySystem energy = other.GetComponentInParent<EnergySystem>();
+        EnergySystem energy =
+            other.GetComponentInParent<EnergySystem>();
+
         if (energy == null) return;
 
         GameFlow flow = GameFlow.Instance;
+
+        TutorialManager tutorial =
+            FindAnyObjectByType<TutorialManager>();
+
+        bool isTutorial = flow != null && flow.tutorialMode;
+
+        if (isTutorial &&
+            (tutorial == null ||
+             tutorial.CurrentStep != TutorialManager.Step.PickUpDice))
+        {
+            Debug.LogWarning(
+                "[Tutorial] Dice collected at wrong step!"
+            );
+            return;
+        }
+
         if (flow != null)
         {
             int lucky = flow.LuckyNumber;
             int reward = normalReward;
 
-            // Callback không giữ tham chiếu tới DicePickup vì object này bị Destroy ngay bên dưới.
-            if (!flow.StartDiceRoll(reward, result => ApplyResult(energy, result, lucky, reward)))
-                return; // chưa mở được màn quay -> giữ nguyên vật phẩm, lần chạm sau thử lại
+            bool started = flow.StartDiceRoll(
+                reward,
+                result =>
+                {
+                    if (energy == null) return;
+
+                    // Trong Tutorial luôn cấp Lucky.
+                    int finalResult =
+                        isTutorial ? lucky : result;
+
+                    ApplyResult(
+                        energy,
+                        finalResult,
+                        lucky,
+                        reward
+                    );
+
+                    // Quay xong mới chuyển bước.
+                    if (isTutorial && tutorial != null)
+                    {
+                        tutorial
+                            .OnTutorialDiceRollCompleted();
+                    }
+                }
+            );
+
+            if (!started)
+                return;
         }
         else
         {
-            // Không có GameFlow: giữ cách cũ (random tức thì).
-            ApplyResult(energy, Random.Range(1, 7), luckyNumber, normalReward);
+            int result = isTutorial
+                ? luckyNumber
+                : Random.Range(1, 7);
+
+            ApplyResult(
+                energy,
+                result,
+                luckyNumber,
+                normalReward
+            );
         }
 
         triggered = true;
+
+        // Phải thông báo sau khi StartDiceRoll thành công.
+        if (isTutorial && tutorial != null)
+        {
+            tutorial.OnTutorialDiceCollected();
+
+            // Trường hợp không có GameFlow.
+            if (flow == null)
+            {
+                tutorial.OnTutorialDiceRollCompleted();
+            }
+        }
+
         Destroy(gameObject);
     }
 
-    private static void ApplyResult(EnergySystem energy, int result, int lucky, int reward)
+    private static void ApplyResult(
+        EnergySystem energy,
+        int result,
+        int lucky,
+        int reward
+    )
     {
-        if (energy == null) return; // scene đã bị load lại
+        if (energy == null) return;
 
-        Debug.Log("Dice rolled: " + result + " (lucky = " + lucky + ")");
+        Debug.Log(
+            $"[Dice] Result={result}, Lucky={lucky}"
+        );
 
         if (result == lucky)
         {
-            Debug.Log("Lucky Dice!");
             energy.ActivateLuckyDice();
+            Debug.Log("[Dice] LUCKY!");
         }
         else
         {
