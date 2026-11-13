@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PlayerAnimationBridge : MonoBehaviour
@@ -20,6 +21,55 @@ public class PlayerAnimationBridge : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
     }
 
+    void OnEnable()
+    {
+        if (controller != null)
+        {
+            controller.OnJumpPerformed += HandleJump;
+            controller.OnDropPerformed += HandleDrop;
+        }
+    }
+
+    void Start()
+    {
+        // Đồng bộ reference nếu được gán muộn.
+        if (controller == null)
+        {
+            controller = GetComponent<PlayerController>();
+
+            if (controller != null)
+            {
+                controller.OnJumpPerformed += HandleJump;
+                controller.OnDropPerformed += HandleDrop;
+            }
+        }
+    }
+
+    void OnDisable()
+    {
+        if (controller != null)
+        {
+            controller.OnJumpPerformed -= HandleJump;
+            controller.OnDropPerformed -= HandleDrop;
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (animator == null) return;
+
+        animator.ResetTrigger("Down");
+        animator.SetTrigger("Jump");
+    }
+
+    private void HandleDrop()
+    {
+        if (animator == null) return;
+
+        animator.ResetTrigger("Jump");
+        animator.SetTrigger("Down");
+    }
+
     void Update()
     {
         if (controller == null || animator == null)
@@ -38,8 +88,7 @@ public class PlayerAnimationBridge : MonoBehaviour
 
             Debug.Log(
                 $"[ANIMATION] " +
-                $"ControllerGrounded={grounded} | " +
-                $"AnimatorGrounded={animator.GetBool("IsGrounded")} | " +
+                $"Grounded={grounded} | " +
                 $"State={GetCurrentState()}"
             );
         }
@@ -52,6 +101,7 @@ public class PlayerAnimationBridge : MonoBehaviour
 
         if (state.IsName("Witch_Run")) return "Run";
         if (state.IsName("Witch_Jump")) return "Jump";
+        if (state.IsName("Witch_Down")) return "Down";
         if (state.IsName("Witch_Shoot")) return "Shoot";
         if (state.IsName("Witch_ShootSpecial")) return "ShootSpecial";
         if (state.IsName("Witch_Die")) return "Die";

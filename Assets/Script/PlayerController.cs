@@ -340,6 +340,9 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(
             rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0f));
 
+        // Kích hoạt animation Down khi Drop trên không
+        OnDropPerformed?.Invoke();
+
         if (debugGround)
             Debug.Log("[DROP] Bonus Down used", this);
     }
