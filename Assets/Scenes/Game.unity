@@ -1188,6 +1188,7 @@ MonoBehaviour:
   notLuckyResultFormat: +{0} ENERGY
   luckyColor: {r: 1, g: 0.85, b: 0.25, a: 1}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
+  tutorialMode: 0
 --- !u!4 &478145349
 Transform:
   m_ObjectHideFlags: 0
@@ -3225,6 +3226,7 @@ GameObject:
   - component: {fileID: 983285506}
   - component: {fileID: 983285507}
   - component: {fileID: 983285508}
+  - component: {fileID: 983285509}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -3244,7 +3246,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1542972706}
   m_Father: {fileID: 1028025281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &983285507
@@ -3328,6 +3331,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &983285509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983285505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23607485659e4745b0e322df71d6d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAura
+  auraAnimator: {fileID: 1542972707}
+  auraRenderer: {fileID: 1542972708}
 --- !u!1 &1015007015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3499,7 +3516,7 @@ GameObject:
   - component: {fileID: 1028025290}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3516,7 +3533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0affb0aac6394dc47ae987f633dc1717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  runSpeed: 8
+  runSpeed: 10
   jumpForce: 16
   groundCheck: {fileID: 0}
   groundLayer:
@@ -3740,7 +3757,7 @@ MonoBehaviour:
   maxEnergy: 100
   currentEnergy: 50
   shootCost: 10
-  specialReady: 1
+  specialReady: 0
   energySlider: {fileID: 704496351}
 --- !u!1 &1054871888
 GameObject:

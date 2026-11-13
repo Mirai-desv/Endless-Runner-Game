@@ -3,17 +3,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Target")]
     public Transform player;
+
+    [Header("Camera Settings")]
     public float offsetX = 3f;
     public float smoothSpeed = 5f;
-
     public float fixedY;
+
     private float fixedZ;
 
     void Start()
     {
-        //fixedY = transform.position.y;
         fixedZ = transform.position.z;
+
+        // Đặt camera đúng vị trí ngay khi bắt đầu
+        if (player != null)
+        {
+            transform.position = new Vector3(
+                player.position.x + offsetX,
+                fixedY,
+                fixedZ
+            );
+        }
     }
 
     void LateUpdate()
@@ -29,7 +41,7 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(
             transform.position,
             target,
-            smoothSpeed * Time.deltaTime
+            Mathf.Clamp01(smoothSpeed * Time.deltaTime)
         );
     }
 }

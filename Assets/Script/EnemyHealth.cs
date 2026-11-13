@@ -1,10 +1,14 @@
 
+using System;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Health")]
     [Min(1)] public int maxHealth = 1;
+
+    // Thông báo khi một con quái bị tiêu diệt.
+    public static event Action<EnemyHealth> OnAnyEnemyDied;
 
     private int currentHealth;
     private bool isDead;
@@ -16,11 +20,15 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isDead || damage <= 0) return;
+        if (isDead || damage <= 0)
+            return;
 
         currentHealth -= damage;
 
-        Debug.Log($"{name} HP: {Mathf.Max(0, currentHealth)}/{maxHealth}");
+        Debug.Log(
+            $"{name} HP: " +
+            $"{Mathf.Max(0, currentHealth)}/{maxHealth}"
+        );
 
         if (currentHealth <= 0)
             Die();
@@ -29,9 +37,12 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         if (isDead) return;
+
         isDead = true;
 
-        // Sau này có thể thêm hiệu ứng chết, âm thanh, điểm.
+        // Thông báo TRƯỚC khi Destroy.
+        OnAnyEnemyDied?.Invoke(this);
+
         Destroy(gameObject);
     }
 }

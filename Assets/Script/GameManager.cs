@@ -98,13 +98,11 @@ public class GameManager : MonoBehaviour
         );
     }
 
+
     public void GoHome()
     {
         Time.timeScale = 1f;
-
-        // Quay về màn Tap to Play
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SceneManager.LoadScene("Home");
     }
+
 }
