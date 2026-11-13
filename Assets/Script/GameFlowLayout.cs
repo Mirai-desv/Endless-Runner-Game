@@ -40,6 +40,7 @@ public class GameFlowUIRefs
     public GameObject upButton;
     public GameObject downButton;
     public GameObject skillButton;
+    public GameObject settingButton;
 
     [Header("Setting Panel")]
     public GameObject SettingPanel;
