@@ -17,6 +17,7 @@ public class EnergySystem : MonoBehaviour
     public Slider energySlider;
 
     public event Action OnEnergyChanged;
+    public event Action OnSpecialActivated;
 
     private void Start()
     {
@@ -66,6 +67,8 @@ public class EnergySystem : MonoBehaviour
         specialReady = true;
 
         UpdateUI();
+
+        OnSpecialActivated?.Invoke();
     }
 
     private void UpdateUI()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerController : MonoBehaviour
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
         new ContactPoint2D[16];
 
     public bool IsGrounded => isGrounded;
+
+    public event Action OnJumpPerformed;
+    public event Action OnDropPerformed;
 
     private void Awake()
     {
@@ -142,6 +146,8 @@ public class PlayerController : MonoBehaviour
                 jumpBufferRemaining = 0f;
                 coyoteRemaining = 0f;
                 isGrounded = false;
+
+                OnJumpPerformed?.Invoke();
 
                 if (debugGround)
                     Debug.Log(canBonusJump
@@ -309,6 +315,8 @@ public class PlayerController : MonoBehaviour
             jumpBufferRemaining = 0f;
             coyoteRemaining = 0f;
             isGrounded = false;
+
+            OnDropPerformed?.Invoke();
 
             if (debugGround)
                 Debug.Log("[DROP] Platform Drop used", this);

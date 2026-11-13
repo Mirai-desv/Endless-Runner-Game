@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PlayerCombat : MonoBehaviour
     public GameObject normalBullet;
     public GameObject specialBullet;
     public Transform firePoint;
+
+    public event Action OnNormalShot;
+    public event Action OnSpecialShot;
 
     void Awake()
     {
@@ -73,6 +77,15 @@ public class PlayerCombat : MonoBehaviour
             firePoint.position,
             Quaternion.identity
         );
+
+        if (isSpecial)
+        {
+            OnSpecialShot?.Invoke();
+        }
+        else
+        {
+            OnNormalShot?.Invoke();
+        }
     }
 
 }
