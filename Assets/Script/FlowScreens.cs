@@ -253,6 +253,20 @@ internal sealed class DiceRollScreen : FlowScreen
             Show(face);
         }
 
+
+        // Tutorial: ép mặt cuối trùng số may mắn.
+        // Các mặt trong lúc quay vẫn ngẫu nhiên.
+        if (flow.tutorialMode)
+        {
+            face = Mathf.Clamp(luckyNumber, 1, 6);
+            Show(face);
+
+            Debug.Log(
+                "[Tutorial Dice] Forced lucky result: " + face
+            );
+        }
+
+
         bool lucky = face == luckyNumber;
         if (lucky)
         {

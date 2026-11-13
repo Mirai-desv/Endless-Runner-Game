@@ -14,11 +14,16 @@ public class TutorialManager : MonoBehaviour
         CollectMoon,
         NormalShoot,
         ChooseLuckyDice,
+        PickUpDice,
+        DiceRoll,
         SpecialShoot,
         Complete
     }
     [Header("Game Flow")]
     public GameFlow gameFlow;
+
+    [Header("Tutorial Map")]
+    public TutorialChunkDirector chunkDirector;
 
     [Header("Gameplay References")]
     public PlayerController playerController;
@@ -34,28 +39,161 @@ public class TutorialManager : MonoBehaviour
     public GameObject energyArrow;
     public GameObject shootArrow;
 
-    [Header("Platform")]
-    public GameObject tutorialPlatformPrefab;
-    public Transform player;
-    public float spawnAhead = 8f;
-    public float platformHeight = 2.5f;
-
     [Header("Settings")]
     public int requiredJumps = 3;
+
+    [Header("Tutorial Enemy")]
+    public float stopDistance = 3.5f;
+
+    private EnemyHealth tutorialEnemy;
+    private float originalRunSpeed;
+    private bool playerStoppedForEnemy;
+    private float nextEnemySearchTime;
+
+    [Header("Platform Detection")]
+    public LayerMask platformLayer;
+
+    [Header("Lucky Dice Transition")]
+    [SerializeField] private float diceDelay = 3f;
+
+    private bool waitingForDice;
+
+    private bool wasGrounded;
+    private bool wasAirborneDuringPlatformStep;
+
+    private bool enemyDefeated;
 
     public Step CurrentStep { get; private set; }
 
     private int jumpCount;
+
+    private bool specialShotFired;
     private bool finished;
 
     void Start()
     {
+        if (playerController != null)
+            originalRunSpeed = playerController.runSpeed;
+
         SetStep(Step.Jump);
+    }
+
+    void Update()
+    {
+        bool isShootingStep =
+    CurrentStep == Step.NormalShoot ||
+    CurrentStep == Step.SpecialShoot;
+
+        if (!isShootingStep || waitingForDice)
+            return;
+
+        if (playerController == null)
+            return;
+
+        // Nếu chưa tìm thấy quái,
+        // tiếp tục tìm khi chunk mới xuất hiện.
+        if (tutorialEnemy == null)
+        {
+            if (Time.time >= nextEnemySearchTime)
+            {
+                FindTutorialEnemy();
+                nextEnemySearchTime = Time.time + 0.25f;
+            }
+
+            return;
+        }
+
+        if (playerStoppedForEnemy)
+            return;
+
+        float distanceX =
+            tutorialEnemy.transform.position.x -
+            playerController.transform.position.x;
+
+        if (distanceX > 0f && distanceX <= stopDistance)
+        {
+            StopPlayerForShooting();
+        }
+    }
+
+    private void FindTutorialEnemy()
+    {
+        EnemyHealth[] enemies =
+    FindObjectsByType<EnemyHealth>();
+
+        float closestDistance = float.MaxValue;
+        EnemyHealth closest = null;
+
+        float playerX =
+            playerController.transform.position.x;
+
+        foreach (EnemyHealth enemy in enemies)
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+                continue;
+
+            float distance =
+                enemy.transform.position.x - playerX;
+
+            // Chỉ tìm quái phía trước Player.
+            if (distance <= 0f)
+                continue;
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = enemy;
+            }
+        }
+
+        if (closest != null)
+        {
+            tutorialEnemy = closest;
+
+            Debug.Log(
+                "[Tutorial] Target enemy: " +
+                tutorialEnemy.name
+            );
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (playerController == null)
+            return;
+
+        if (CurrentStep != Step.ReachPlatform)
+            return;
+
+        bool grounded = playerController.IsGrounded;
+
+        // Phải thực sự rời mặt đất trước.
+        if (!grounded)
+        {
+            wasAirborneDuringPlatformStep = true;
+        }
+
+        // Phát hiện tiếp đất sau khi nhảy.
+        if (grounded &&
+            !wasGrounded &&
+            wasAirborneDuringPlatformStep)
+        {
+            if (IsStandingOnPlatform())
+            {
+                OnPlatformReached();
+            }
+        }
+
+        wasGrounded = grounded;
     }
 
     void SetStep(Step step)
     {
         CurrentStep = step;
+
+        // Chọn nhóm chunk theo bước Tutorial.
+        if (chunkDirector != null)
+            chunkDirector.UseStep(step);
 
         if (jumpArrow != null)
             jumpArrow.SetActive(step == Step.Jump ||
@@ -83,12 +221,17 @@ public class TutorialManager : MonoBehaviour
 
             case Step.ReachPlatform:
                 Show("JUMP ON THE PLATFORM!");
-                SpawnTutorialPlatform();
+
+                wasGrounded = playerController != null &&
+                              playerController.IsGrounded;
+
+                wasAirborneDuringPlatformStep = false;
                 break;
 
             case Step.Drop:
                 Show("TAP TO DROP");
-                progressText.text = "0/1";
+                if (progressText != null)
+                    progressText.text = "0/1";
                 break;
 
             case Step.CollectMoon:
@@ -96,7 +239,17 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case Step.NormalShoot:
-                Show("TAP TO SHOOT!");
+                Show("SHOOT THE ENEMY!");
+
+                tutorialEnemy = null;
+                playerStoppedForEnemy = false;
+                originalRunSpeed = playerController != null
+                    ? playerController.runSpeed
+                    : 0f;
+
+                if (progressText != null)
+                    progressText.text = "0/1";
+
                 break;
 
             case Step.ChooseLuckyDice:
@@ -112,10 +265,37 @@ public class TutorialManager : MonoBehaviour
                     }
                 }
                 break;
+            case Step.PickUpDice:
+                Show("PICK UP THE DICE!");
+
+                if (progressText != null)
+                    progressText.text = "0/1";
+
+                break;
+
+            case Step.DiceRoll:
+                Show("ROLLING THE DICE!");
+                break;
+
 
             case Step.SpecialShoot:
                 Show("UNLEASH YOUR POWER!");
+
+                tutorialEnemy = null;
+                specialShotFired = false;
+                playerStoppedForEnemy = false;
+
+                originalRunSpeed = playerController != null
+                    ? playerController.runSpeed
+                    : 0f;
+
+                nextEnemySearchTime = 0f;
+
+                if (progressText != null)
+                    progressText.text = "0/1";
+
                 break;
+
 
             case Step.Complete:
                 CompleteTutorial();
@@ -134,6 +314,39 @@ public class TutorialManager : MonoBehaviour
         if (progressText != null)
             progressText.text =
                 jumpCount + "/" + requiredJumps;
+    }
+
+    private bool IsStandingOnPlatform()
+    {
+        Collider2D playerCollider =
+            playerController.GetComponent<Collider2D>();
+
+        if (playerCollider == null)
+            return false;
+
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(platformLayer);
+        filter.useTriggers = false;
+
+        RaycastHit2D[] hits = new RaycastHit2D[8];
+
+        int count = playerCollider.Cast(
+            Vector2.down,
+            filter,
+            hits,
+            0.12f
+        );
+
+        for (int i = 0; i < count; i++)
+        {
+            if (hits[i].collider == null)
+                continue;
+
+            if (hits[i].normal.y > 0.5f)
+                return true;
+        }
+
+        return false;
     }
 
     void OnEnable()
@@ -160,6 +373,8 @@ public class TutorialManager : MonoBehaviour
             gameFlow.OnTutorialLuckyNumberChosen +=
                 HandleLuckyNumberChosen;
         }
+
+        EnemyHealth.OnAnyEnemyDied += HandleEnemyDied;
     }
 
     void OnDisable()
@@ -186,6 +401,10 @@ public class TutorialManager : MonoBehaviour
             gameFlow.OnTutorialLuckyNumberChosen -=
                 HandleLuckyNumberChosen;
         }
+
+            EnemyHealth.OnAnyEnemyDied -= HandleEnemyDied;
+
+            ResumePlayer();        
     }
 
     void HandleEnergyChanged()
@@ -240,45 +459,41 @@ public class TutorialManager : MonoBehaviour
     // Gọi khi bắn thường thành công
     public void OnNormalShoot()
     {
-        if (CurrentStep == Step.NormalShoot)
-            SetStep(Step.ChooseLuckyDice);
+        if (CurrentStep != Step.NormalShoot)
+            return;
+
+        Debug.Log("[Tutorial] Normal shot fired!");
     }
 
     // Gọi khi cơ chế Special Mode đã sẵn sàng
-       private void HandleLuckyNumberChosen(int number)
+    private void HandleLuckyNumberChosen(int number)
     {
         if (CurrentStep != Step.ChooseLuckyDice)
             return;
 
         Debug.Log("[Tutorial] Lucky Number: " + number);
 
-        // Cấp Special Mode để người chơi tập bắn.
-        if (energySystem != null)
-        {
-            energySystem.ActivateLuckyDice();
-        }
-
-        SetStep(Step.SpecialShoot);
+        // Chỉ lưu/chọn số thông qua GameFlow.
+        // Chưa kích hoạt Special Mode.
+        SetStep(Step.PickUpDice);
     }
 
     // Gọi khi sử dụng đạn đặc biệt thành công
+
     public void OnSpecialShoot()
     {
-        if (CurrentStep == Step.SpecialShoot)
-            SetStep(Step.Complete);
-    }
-
-    void SpawnTutorialPlatform()
-    {
-        if (tutorialPlatformPrefab == null || player == null)
+        if (CurrentStep != Step.SpecialShoot)
             return;
 
-        Vector3 position = player.position +
-            new Vector3(spawnAhead, platformHeight, 0f);
+        specialShotFired = true;
 
-        Instantiate(tutorialPlatformPrefab, position,
-            Quaternion.identity);
+        Debug.Log(
+            "[Tutorial] Special shot registered!"
+        );
+
+        Show("DEFEAT THE ENEMY!");
     }
+
 
     void CompleteTutorial()
     {
@@ -293,14 +508,181 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(FinishRoutine());
     }
 
-    IEnumerator FinishRoutine()
+
+    private IEnumerator FinishRoutine()
     {
+        // Hiện thông báo hoàn thành trong 2 giây
         yield return new WaitForSecondsRealtime(2f);
 
+        // Lưu trạng thái hoàn thành Tutorial
         PlayerPrefs.SetInt("TutorialCompleted", 1);
         PlayerPrefs.Save();
 
+        // Đảm bảo game không bị Pause
         Time.timeScale = 1f;
+
+        // Chuyển sang màn chơi chính
         SceneManager.LoadScene("Game");
     }
+
+
+    private void StopPlayerForShooting()
+    {
+        if (playerStoppedForEnemy)
+            return;
+
+        playerStoppedForEnemy = true;
+
+        // Chỉ dừng chạy ngang.
+        // Player vẫn có thể nhảy, drop và bắn.
+        playerController.runSpeed = 0f;
+
+        Debug.Log(
+            "[Tutorial] Stop and shoot the enemy!"
+        );
+    }
+
+    private void ResumePlayer()
+    {
+        if (playerController == null)
+            return;
+
+        if (!playerStoppedForEnemy)
+            return;
+
+        playerController.runSpeed = originalRunSpeed;
+        playerStoppedForEnemy = false;
+    }
+
+    public bool ShouldIgnoreEnemyContact(EnemyHealth enemy)
+    {
+        // Miễn sát thương khi tập bắn quái mục tiêu.
+        if (CurrentStep == Step.NormalShoot)
+        {
+            return tutorialEnemy != null &&
+                   enemy == tutorialEnemy;
+        }
+
+        // Miễn sát thương từ quái khi nhặt/quay Dice
+        // và tập bắn đặc biệt.
+        if (CurrentStep == Step.PickUpDice ||
+            CurrentStep == Step.DiceRoll ||
+            CurrentStep == Step.SpecialShoot)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private void HandleEnemyDied(EnemyHealth enemy)
+    {
+        if (enemy == null)
+            return;
+
+        // NORMAL SHOOT
+        if (CurrentStep == Step.NormalShoot)
+        {
+            if (enemy != tutorialEnemy)
+                return;
+
+            if (waitingForDice)
+                return;
+
+            Debug.Log(
+                "[Tutorial] Normal enemy defeated!"
+            );
+
+            tutorialEnemy = null;
+            waitingForDice = true;
+
+            ResumePlayer();
+
+            if (progressText != null)
+                progressText.text = "1/1";
+
+            Show("GREAT SHOT!");
+
+            StartCoroutine(WaitForLuckyDice());
+            return;
+        }
+
+        // SPECIAL SHOOT
+        if (CurrentStep == Step.SpecialShoot)
+        {
+            // Chấp nhận quái đã được chọn làm mục tiêu.
+            // Nếu chưa kịp chọn mục tiêu, tìm quái chết
+            // ở phía trước Player làm fallback.
+            if (tutorialEnemy != null &&
+                enemy != tutorialEnemy)
+                return;
+
+            if (tutorialEnemy == null &&
+                playerController != null &&
+                enemy.transform.position.x <
+                    playerController.transform.position.x)
+                return;
+
+            if (!specialShotFired)
+            {
+                Debug.LogWarning(
+                    "[Tutorial] Enemy died without " +
+                    "a recorded special shot."
+                );
+                return;
+            }
+
+            Debug.Log(
+                "[Tutorial] Special enemy defeated!"
+            );
+
+            tutorialEnemy = null;
+            ResumePlayer();
+
+            if (progressText != null)
+                progressText.text = "1/1";
+
+            SetStep(Step.Complete);
+        }
+    }
+
+    private IEnumerator WaitForLuckyDice()
+    {
+        // Player vẫn chạy trong thời gian chờ.
+        yield return new WaitForSeconds(diceDelay);
+
+        if (CurrentStep != Step.NormalShoot)
+            yield break;
+
+        waitingForDice = false;
+
+        SetStep(Step.ChooseLuckyDice);
+    }
+
+    // Gọi khi Player thực sự nhặt Dice.
+    public void OnTutorialDiceCollected()
+    {
+        if (CurrentStep != Step.PickUpDice)
+            return;
+
+        Debug.Log("[Tutorial] Dice collected!");
+
+        SetStep(Step.DiceRoll);
+    }
+
+    // Gọi sau khi Dice quay XONG và hiện kết quả.
+
+    public void OnTutorialDiceRollCompleted()
+    {
+        if (CurrentStep != Step.DiceRoll)
+            return;
+
+        Debug.Log("[Tutorial] Dice roll completed!");
+
+        // DicePickup đã kích hoạt Lucky.
+        // Không cộng thưởng lần thứ hai.
+        SetStep(Step.SpecialShoot);
+    }
+
 }

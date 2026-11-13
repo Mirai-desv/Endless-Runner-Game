@@ -250,9 +250,9 @@ public class GameFlow : MonoBehaviour
             normalReward,
             result =>
             {
-                onFinished?.Invoke(result);
                 Time.timeScale = timeScaleBeforeRoll;
                 SetState(GameFlowState.Playing);
+                onFinished?.Invoke(result);
             });
         return true;
     }

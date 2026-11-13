@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe97abb69da4f1458094f165a82ffb8, type: 3}
   m_Name: ChunkTutLib
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkTutLib
-  chunks: []
+  chunks:
+  - {fileID: 11400000, guid: e32cb221576dc724b9e181ac1418539e, type: 2}
+  - {fileID: 11400000, guid: f834f2144af4b3340af4f1c6975376a7, type: 2}
+  - {fileID: 11400000, guid: 72fbc9145b3a389489499c82c1ebfa00, type: 2}
+  - {fileID: 11400000, guid: 0a4612c58203bfe438dcfa59bf1f7dcf, type: 2}
+  - {fileID: 11400000, guid: 0a4612c58203bfe438dcfa59bf1f7dcf, type: 2}
