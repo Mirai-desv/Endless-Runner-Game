@@ -16,6 +16,6 @@ MonoBehaviour:
   difficulty: 1
   tags:
   - safe
-  minSpeed: 2
+  minSpeed: 8
   maxSpeed: 8
   weight: 3
