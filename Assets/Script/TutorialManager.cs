@@ -509,21 +509,16 @@ public class TutorialManager : MonoBehaviour
     }
 
 
+
     private IEnumerator FinishRoutine()
     {
         // Hiện thông báo hoàn thành trong 2 giây
         yield return new WaitForSecondsRealtime(2f);
 
-        // Lưu trạng thái hoàn thành Tutorial
-        PlayerPrefs.SetInt("TutorialCompleted", 1);
-        PlayerPrefs.Save();
-
-        // Đảm bảo game không bị Pause
-        Time.timeScale = 1f;
-
-        // Chuyển sang màn chơi chính
-        SceneManager.LoadScene("Game");
+        // Lưu tiến độ và chuyển sang Game Scene
+        GameStartup.CompleteTutorial();
     }
+
 
 
     private void StopPlayerForShooting()
@@ -684,5 +679,10 @@ public class TutorialManager : MonoBehaviour
         // Không cộng thưởng lần thứ hai.
         SetStep(Step.SpecialShoot);
     }
+    public void SkipTutorial()
+    {
+        Debug.Log("Tutorial skipped!");
 
+        GameStartup.CompleteTutorial();
+    }
 }

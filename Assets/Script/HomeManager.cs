@@ -4,24 +4,26 @@ using UnityEngine.SceneManagement;
 
 public class HomeManager : MonoBehaviour
 {
+
     public void PlayGame()
     {
         Time.timeScale = 1f;
 
-        bool completed =
+        bool tutorialCompleted =
             PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
 
-        if (completed)
+        if (tutorialCompleted)
         {
-            // Đã hoàn thành Tutorial
-            SceneManager.LoadScene("Game");
+            Debug.Log("[Home] Tutorial completed -> Game");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
         }
         else
         {
-            // Lần đầu chơi
-            SceneManager.LoadScene("Tutorial");
+            Debug.Log("[Home] First time -> Tutorial");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
         }
     }
+
 
     // Dùng để test lại Tutorial trong Editor.
     [ContextMenu("Reset Tutorial")]
