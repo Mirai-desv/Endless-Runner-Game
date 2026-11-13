@@ -25,9 +25,7 @@ public class GameFlow : MonoBehaviour
     // Các script input (PlayerInputBridge, PlayerCombat) kiểm tra cờ này.
     // Khóa thêm 1 frame sau khi vào Playing để cú chạm "Tap to play" không bị tính là cú nhảy.
     public static bool InputLocked =>
-        SettingsPanel.IsOpen ||
-        (Instance != null &&
-        (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame));
+        (SettingsPanel.IsOpen || Instance != null && (Instance.State != GameFlowState.Playing || Time.frameCount <= Instance.unlockFrame));
 
     [Header("UI (object thật trong scene - chỉnh thoải mái trong Unity)")]
     [Tooltip("Tạo sẵn bằng menu Tools > Endless Runner > Create Game Flow UI in Scene. " +
@@ -203,6 +201,7 @@ public class GameFlow : MonoBehaviour
         if (ui.upButton != null) ui.upButton.SetActive(showGameplayUI);
         if (ui.downButton != null) ui.downButton.SetActive(showGameplayUI);
         if (ui.skillButton != null) ui.skillButton.SetActive(showGameplayUI);
+        if(ui.settingButton != null) ui.settingButton.SetActive(showGameplayUI);
     }
 
     // Người chơi chạm màn hình ở menu -> sang chọn số may mắn
