@@ -6,17 +6,17 @@ using UnityEngine.UI;
 // List SFX in game. If you want to take a new sound, please add name in this list
 public enum SoundId
 {
-    NormalShot,
-    SpecialShot,
-    Jump,
-    DiceRoll,
-    EnemyAttack,
-    EnemyBullet,
-    WallHit,
-    PickUp,
-    Die,
-    ButtonClick,
-    MenuShow
+    NormalShot,   // bắn đạn thường
+    SpecialShot,  // bắn đạn siêu cấp
+    Jump,         // nhảy
+    DiceRoll,     // rung / quay xúc xắc (phát lặp trong lúc quay)
+    EnemyAttack,  // quái bắt đầu tấn công (vung / lên nòng)
+    EnemyBullet,  // đạn của quái bắn ra
+    WallHit,      // đạn bắn trúng tường / vật cản
+    Pickup,       // ăn điểm (Moon)
+    Die,          // chết
+    ButtonClick,  // bấm nút
+    MenuShow      // menu / panel xuất hiện
 }
 
 [System.Serializable]
