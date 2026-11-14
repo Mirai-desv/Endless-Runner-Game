@@ -163,7 +163,8 @@ public class GameFlow : MonoBehaviour
         else
         {
             Time.timeScale = 0f;
-            SetState(GameFlowState.Menu);
+            SetState(GameFlowState.PickLuckyNumber);
+            //SetState(GameFlowState.Menu);
         }
     }
 
@@ -189,7 +190,8 @@ public class GameFlow : MonoBehaviour
         State = next;
         if (next == GameFlowState.Playing) unlockFrame = Time.frameCount;
 
-        screens.menu.SetVisible(next == GameFlowState.Menu);
+        //screens.menu.SetVisible(next == GameFlowState.Menu);
+        screens.menu.SetVisible(false);
         screens.luckyPicker.SetVisible(next == GameFlowState.PickLuckyNumber);
         screens.diceRoll.SetVisible(next == GameFlowState.DiceRoll);
 
