@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Air Control")]
     [SerializeField] private bool allowAirDrop = true;
     [SerializeField] private bool allowDropJump = true;
+    [SerializeField] private float airDropSpeed = 4f;
 
     [Header("Debug")]
     [SerializeField] private bool debugGround = false;
@@ -293,58 +294,55 @@ public class PlayerController : MonoBehaviour
         if (!isRunning || rb == null || !rb.simulated)
             return;
 
-        // Không xuyên Ground đặc. Nếu đang đứng trên Ground đặc,
-        // không tiêu tốn quyền Bonus Down.
+        // Không cho xuyên Ground đặc khi đang đứng trên đó
         if (isGrounded && IsOnSolidGround())
-            return;
-
-        if (isBonusDownUsed)
             return;
 
         bool onPlatform =
             dropThrough != null && dropThrough.HasPlatformBelow();
 
-        // Đang đứng trên Platform: chỉ Drop nếu bắt đầu xuyên được.
+        // Đang đứng trên Platform
         if (isGrounded)
         {
-            if (dropThrough == null || !onPlatform ||
+            if (dropThrough == null ||
+                !onPlatform ||
                 !dropThrough.TryDrop())
                 return;
 
-            isBonusDownUsed = true;
             jumpBufferRemaining = 0f;
             coyoteRemaining = 0f;
             isGrounded = false;
 
             OnDropPerformed?.Invoke();
-
-            if (debugGround)
-                Debug.Log("[DROP] Platform Drop used", this);
             return;
         }
 
-        // Trên không: Bonus Down dùng tối đa một lần.
+        // Đang trên không
         if (!allowAirDrop)
             return;
 
-        isBonusDownUsed = true;
         jumpBufferRemaining = 0f;
         coyoteRemaining = 0f;
 
-        // Nếu có Platform hợp lệ sát chân thì bỏ collision để xuyên.
+        // Cho phép xuyên Platform nếu có thể
         if (dropThrough != null &&
-            !dropThrough.IsDropping && onPlatform)
+            !dropThrough.IsDropping &&
+            onPlatform)
+        {
             dropThrough.TryDrop();
+        }
 
-        // Dừng vận tốc đi lên, chuyển thành rơi.
+        // Chỉ tăng tốc rơi nếu đang rơi chậm hơn tốc độ mong muốn.
+        // Không làm nhân vật bị chậm lại nếu đã rơi nhanh.
         rb.linearVelocity = new Vector2(
-            rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0f));
+            rb.linearVelocity.x,
+            Mathf.Min(rb.linearVelocity.y, -airDropSpeed)
+        );
 
-        // Kích hoạt animation Down khi Drop trên không
         OnDropPerformed?.Invoke();
 
         if (debugGround)
-            Debug.Log("[DROP] Bonus Down used", this);
+            Debug.Log("[DROP] Air Drop", this);
     }
 
     public void StopRunning()
