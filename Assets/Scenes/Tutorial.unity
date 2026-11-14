@@ -4329,7 +4329,7 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: 31bed27fd6acb7b489775deac4e0a85c, type: 2}
   startChunk: {fileID: 0}
   target: {fileID: 1028025281}
-  spawnAhead: 15
+  spawnAhead: 17
   despawnBehind: 25
   safeChunksAtStart: 0
   avoidRepeatCount: 0
