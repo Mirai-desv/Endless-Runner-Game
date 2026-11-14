@@ -583,7 +583,7 @@ MonoBehaviour:
   m_text: TAP TO PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea07b8c2aeed91147a2693bf9164d203, type: 2}
-  m_sharedMaterial: {fileID: -7242468794552733801, guid: ea07b8c2aeed91147a2693bf9164d203, type: 2}
+  m_sharedMaterial: {fileID: 6055136828660198671, guid: ea07b8c2aeed91147a2693bf9164d203, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -768,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f02a0e08951974190a0785a8ccfca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
+  alwaysShowTutorialInEditor: 1
 --- !u!4 &2128611577
 Transform:
   m_ObjectHideFlags: 0

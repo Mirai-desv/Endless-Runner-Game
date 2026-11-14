@@ -3581,8 +3581,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.06501981, y: 0}
+  m_Size: {x: 0.30411747, y: 1}
   m_Direction: 0
 --- !u!50 &1028025279
 Rigidbody2D:
@@ -3755,7 +3755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnergySystem
   maxEnergy: 100
-  currentEnergy: 50
+  currentEnergy: 0
   shootCost: 10
   specialReady: 0
   energySlider: {fileID: 704496351}
@@ -4173,8 +4173,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 094641b088983de4c91096b66ffec536, type: 2}
+  m_sharedMaterial: {fileID: 7339579675103459877, guid: 094641b088983de4c91096b66ffec536, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4868,8 +4868,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1525449033}
   - component: {fileID: 1525449034}
-  - component: {fileID: 1525449035}
-  - component: {fileID: 1525449036}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4915,143 +4913,6 @@ MonoBehaviour:
   skillButton: {fileID: 1925868188}
   settingButton: {fileID: 712957011}
   settingPanel: {fileID: 634565235}
---- !u!114 &1525449035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525449032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9388a72cd16bf574497474767e138dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  backgroundMusic: {fileID: 8300000, guid: 4db6b02d9730b5a458c72356650020a1, type: 3}
-  playMusicOnStart: 1
-  musicFadeTime: 1
-  masterVolume: 1
-  musicVolume: 0.6
-  sfxVolume: 1
-  sounds:
-  - name: NormalShot
-    id: 0
-    clips:
-    - {fileID: 8300000, guid: 7afd610949e5e9d49b0ee7b7142bedc9, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: SpecialShot
-    id: 1
-    clips:
-    - {fileID: 8300000, guid: d74ff568fb0ce9a418a9e5b14f72f24f, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: Jump
-    id: 2
-    clips:
-    - {fileID: 8300000, guid: 21d48fc8e3ed9ee4cbbd9e6a8d543a9e, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: DiceRoll
-    id: 3
-    clips: []
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 1
-  - name: EnemyAttack
-    id: 4
-    clips: []
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: EnemyBullet
-    id: 5
-    clips:
-    - {fileID: 8300000, guid: 89a227a378457cf49ab985b304e0e975, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: WallHit
-    id: 6
-    clips:
-    - {fileID: 8300000, guid: 902984d4a7fda9e4382dce68cff07d1c, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.08
-    loop: 0
-  - name: PickUp
-    id: 7
-    clips:
-    - {fileID: 8300000, guid: 6c281b8fb6dcbb24a93215a25ca29626, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: Die
-    id: 8
-    clips:
-    - {fileID: 8300000, guid: 618bbe56e6baa0c4d80f2bba0e8b76b2, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: ButtonClick
-    id: 9
-    clips:
-    - {fileID: 8300000, guid: 4ea6d5a1a1eb2c2499163d03ae7849bd, type: 3}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  - name: MenuShow
-    id: 10
-    clips:
-    - {fileID: 0}
-    volume: 1
-    pitchMin: 1
-    pitchMax: 1
-    minInterval: 0.03
-    loop: 0
-  voiceCount: 12
-  autoHook: 1
-  ignoreGameplayButtons: 1
-  ignoredButtons: []
-  duckMusic: 1
-  duckVolume: 0.35
-  gameOverMenuDelay: 0.8
---- !u!114 &1525449036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525449032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3af24cd4527114eb5831fdf25ed46c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioVolumeSliders
-  musicSlider: {fileID: 687791394}
-  sfxSlider: {fileID: 1091134653}
 --- !u!4 &1542972706
 Transform:
   m_ObjectHideFlags: 0
@@ -6093,7 +5954,7 @@ MonoBehaviour:
   maxDifficulty: 1
   seed: 0
   prewarmPerChunk: 1
-  initialPlayerOffsetX: 8
+  initialPlayerOffsetX: 10
   initialPlayerOffsetY: -1
 --- !u!4 &1960056991
 Transform:
@@ -6105,6 +5966,167 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1960528624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960528627}
+  - component: {fileID: 1960528626}
+  - component: {fileID: 1960528625}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960528625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960528624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3af24cd4527114eb5831fdf25ed46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioVolumeSliders
+  musicSlider: {fileID: 687791394}
+  sfxSlider: {fileID: 1091134653}
+--- !u!114 &1960528626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960528624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9388a72cd16bf574497474767e138dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  backgroundMusic: {fileID: 8300000, guid: 4db6b02d9730b5a458c72356650020a1, type: 3}
+  playMusicOnStart: 1
+  musicFadeTime: 1
+  masterVolume: 1
+  musicVolume: 0.6
+  sfxVolume: 1
+  sounds:
+  - name: NormalShot
+    id: 0
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: SpecialShot
+    id: 1
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: Jump
+    id: 2
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: DiceRoll
+    id: 3
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 1
+  - name: EnemyAttack
+    id: 4
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: EnemyBullet
+    id: 5
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: WallHit
+    id: 6
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.08
+    loop: 0
+  - name: PickUp
+    id: 7
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: Die
+    id: 8
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: ButtonClick
+    id: 9
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: MenuShow
+    id: 10
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  voiceCount: 12
+  autoHook: 1
+  ignoreGameplayButtons: 1
+  ignoredButtons: []
+  duckMusic: 1
+  duckVolume: 0.35
+  gameOverMenuDelay: 0.8
+--- !u!4 &1960528627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960528624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 828.21326, y: 414.583, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6359,6 +6381,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 811492736}
   - {fileID: 1525449033}
+  - {fileID: 1960528627}
   - {fileID: 148318228}
   - {fileID: 478145349}
   - {fileID: 1028025281}

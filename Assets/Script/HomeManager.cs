@@ -1,13 +1,24 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HomeManager : MonoBehaviour
 {
+    [Header("Editor Testing")]
+    [SerializeField]
+    private bool alwaysShowTutorialInEditor = false;
 
     public void PlayGame()
     {
         Time.timeScale = 1f;
+
+#if UNITY_EDITOR
+        if (alwaysShowTutorialInEditor)
+        {
+            Debug.Log("[Home] Editor Test -> Tutorial");
+            SceneManager.LoadScene("Tutorial");
+            return;
+        }
+#endif
 
         bool tutorialCompleted =
             PlayerPrefs.GetInt("TutorialCompleted", 0) == 1;
@@ -15,17 +26,15 @@ public class HomeManager : MonoBehaviour
         if (tutorialCompleted)
         {
             Debug.Log("[Home] Tutorial completed -> Game");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Game");
         }
         else
         {
             Debug.Log("[Home] First time -> Tutorial");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene("Tutorial");
         }
     }
 
-
-    // Dùng để test lại Tutorial trong Editor.
     [ContextMenu("Reset Tutorial")]
     public void ResetTutorial()
     {

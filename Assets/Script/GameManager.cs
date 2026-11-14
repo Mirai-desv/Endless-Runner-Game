@@ -31,44 +31,81 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        isGameOver = false;
         Time.timeScale = 1f;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        Debug.Log(
+            $"[GameManager] Initialized | " +
+            $"ID={GetEntityId()} | " +
+            $"Scene={gameObject.scene.name}"
+        );
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log(
+            $"[GameManager] Destroyed | ID={GetEntityId()}"
+        );
+
+        if (Instance == this)
+            Instance = null;
     }
 
     void Start()
     {
-        gameOverPanel.SetActive(false);
+        isGameOver = false;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 
     public void GameOver()
     {
-        if (isGameOver) return;
+        Debug.Log("[GameManager] GameOver() CALLED");
+
+        if (isGameOver)
+        {
+            Debug.LogWarning("[GameManager] Game đã ở trạng thái GameOver!");
+            return;
+        }
 
         isGameOver = true;
 
-        // Dừng nhân vật
         if (player != null)
             player.StopRunning();
 
-        // Lấy điểm cuối cùng
         int score = scoreTracker != null
             ? scoreTracker.Score
             : 0;
 
-        // Hiển thị điểm
         if (finalScoreText != null)
             finalScoreText.text = score.ToString();
 
-        // Ẩn toàn bộ UI gameplay
         HideGameplayUI();
 
-        // Hiện màn hình Game Over
         if (gameOverPanel != null)
+        {
             gameOverPanel.SetActive(true);
 
-        // Dừng game
+            Debug.Log(
+                "[GameManager] GameOverPanel activeSelf = " +
+                gameOverPanel.activeSelf +
+                ", activeInHierarchy = " +
+                gameOverPanel.activeInHierarchy
+            );
+        }
+        else
+        {
+            Debug.LogError("[GameManager] GameOverPanel chưa được gán!");
+        }
+
         Time.timeScale = 0f;
 
-        Debug.Log("Final Score: " + score);
+        Debug.Log("[GameManager] Final Score: " + score);
     }
 
     private void HideGameplayUI()
@@ -91,18 +128,29 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1f;
+        ResetGameOver();
 
         SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
+            SceneManager.GetActiveScene().name
         );
     }
 
-
     public void GoHome()
     {
-        Time.timeScale = 1f;
+        ResetGameOver();
+
         SceneManager.LoadScene("Home");
+    }
+
+
+    private void ResetGameOver()
+    {
+        isGameOver = false;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 
 }

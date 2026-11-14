@@ -41,5 +41,19 @@ public class PlayerHitReceiver : MonoBehaviour
 
         // Thông báo hệ thống Game Over.
         onPlayerDead?.Invoke();
+
+        Debug.Log(
+    "[PlayerHitReceiver] GameManager.Instance = " +
+    (GameManager.Instance != null
+        ? GameManager.Instance.GetEntityId().ToString()
+        : "NULL")
+);
+
+        Debug.Log(
+            "[PlayerHitReceiver] UnityEvent listeners = " +
+            onPlayerDead.GetPersistentEventCount()
+        );
+
+        onPlayerDead?.Invoke();
     }
 }
