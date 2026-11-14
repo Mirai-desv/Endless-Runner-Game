@@ -2024,6 +2024,7 @@ GameObject:
   - component: {fileID: 955914911}
   - component: {fileID: 955914910}
   - component: {fileID: 955914909}
+  - component: {fileID: 955914912}
   m_Layer: 5
   m_Name: DownButton
   m_TagString: Untagged
@@ -2144,6 +2145,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955914907}
   m_CullTransparentMesh: 1
+--- !u!114 &955914912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955914907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e5a17a12cfcb34ca88c91b0759d598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyboardButtonVisual
+  keys: 2100000040000000
 --- !u!1 &983285505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,6 +3242,7 @@ GameObject:
   - component: {fileID: 1353979970}
   - component: {fileID: 1353979969}
   - component: {fileID: 1353979968}
+  - component: {fileID: 1353979971}
   m_Layer: 5
   m_Name: UpButton
   m_TagString: Untagged
@@ -3348,6 +3363,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353979966}
   m_CullTransparentMesh: 1
+--- !u!114 &1353979971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353979966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e5a17a12cfcb34ca88c91b0759d598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyboardButtonVisual
+  keys: 250000003f000000
 --- !u!1 &1389821743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4681,6 +4709,7 @@ GameObject:
   - component: {fileID: 2086638446}
   - component: {fileID: 2086638445}
   - component: {fileID: 2086638444}
+  - component: {fileID: 2086638447}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -4801,6 +4830,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086638442}
   m_CullTransparentMesh: 1
+--- !u!114 &2086638447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086638442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e5a17a12cfcb34ca88c91b0759d598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyboardButtonVisual
+  keys: 01000000
 --- !u!1 &2113911525
 GameObject:
   m_ObjectHideFlags: 0

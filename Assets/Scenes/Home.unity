@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f02a0e08951974190a0785a8ccfca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
-  alwaysShowTutorialInEditor: 1
+  alwaysShowTutorialInEditor: 0
 --- !u!4 &2128611577
 Transform:
   m_ObjectHideFlags: 0
