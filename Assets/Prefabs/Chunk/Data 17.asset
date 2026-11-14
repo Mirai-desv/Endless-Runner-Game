@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Data 17
   m_EditorClassIdentifier: Assembly-CSharp::EndlessRunner.Run.World.ChunkData
   prefab: {fileID: 6836392418491857848, guid: b87ef704cdea3bd40ba3f21fb982ba09, type: 3}
-  difficulty: 3
+  difficulty: 1
   tags:
-  - hard
+  - safe
   minSpeed: 8
   maxSpeed: 12
   weight: 3

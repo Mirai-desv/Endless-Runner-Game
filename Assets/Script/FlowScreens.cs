@@ -239,15 +239,11 @@ internal sealed class DiceRollScreen : FlowScreen
             die.rectTransform.localScale =
                 Vector3.Lerp(die.rectTransform.localScale, dieBaseScale, 15f * dt);
 
-            if (timer < interval) continue;
-            timer -= interval;
+            if (elapsed > flow.spinDuration) break;
 
             // Hết giai đoạn quay nhanh: mỗi lần đổi mặt, khoảng chờ kế tiếp dài dần.
-            if (elapsed > flow.spinDuration)
-            {
-                interval *= flow.slowdownGrowth;
-                if (interval > flow.stopInterval) break; // dừng hẳn, mặt đang hiện là kết quả
-            }
+            if (timer < interval) continue;
+            timer -= interval;
 
             face = NextFace(face);
             Show(face);
