@@ -170,6 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicProjectile
   speed: 17
-  lifetime: 5
+  lifetime: 2
   damage: 2
   isSpecial: 1

@@ -102,18 +102,6 @@ public class TutorialManager : MonoBehaviour
 
             return;
         }
-
-        if (playerStoppedForEnemy)
-            return;
-
-        float distanceX =
-            tutorialEnemy.transform.position.x -
-            playerController.transform.position.x;
-
-        if (distanceX > 0f && distanceX <= stopDistance)
-        {
-            StopPlayerForShooting();
-        }
     }
 
     private void FindTutorialEnemy()
@@ -242,10 +230,6 @@ public class TutorialManager : MonoBehaviour
                 Show("SHOOT THE ENEMY!");
 
                 tutorialEnemy = null;
-                playerStoppedForEnemy = false;
-                originalRunSpeed = playerController != null
-                    ? playerController.runSpeed
-                    : 0f;
 
                 if (progressText != null)
                     progressText.text = "0/1";
@@ -283,11 +267,6 @@ public class TutorialManager : MonoBehaviour
 
                 tutorialEnemy = null;
                 specialShotFired = false;
-                playerStoppedForEnemy = false;
-
-                originalRunSpeed = playerController != null
-                    ? playerController.runSpeed
-                    : 0f;
 
                 nextEnemySearchTime = 0f;
 
@@ -402,9 +381,9 @@ public class TutorialManager : MonoBehaviour
                 HandleLuckyNumberChosen;
         }
 
-            EnemyHealth.OnAnyEnemyDied -= HandleEnemyDied;
+        EnemyHealth.OnAnyEnemyDied -= HandleEnemyDied;
 
-            ResumePlayer();        
+        ResumePlayer();
     }
 
     void HandleEnergyChanged()
@@ -503,7 +482,7 @@ public class TutorialManager : MonoBehaviour
         Show("TUTORIAL COMPLETE!");
 
         if (progressText != null)
-        progressText.text = "";
+            progressText.text = "";
 
         StartCoroutine(FinishRoutine());
     }
@@ -551,23 +530,8 @@ public class TutorialManager : MonoBehaviour
 
     public bool ShouldIgnoreEnemyContact(EnemyHealth enemy)
     {
-        // Miễn sát thương khi tập bắn quái mục tiêu.
-        if (CurrentStep == Step.NormalShoot)
-        {
-            return tutorialEnemy != null &&
-                   enemy == tutorialEnemy;
-        }
+        return true;
 
-        // Miễn sát thương từ quái khi nhặt/quay Dice
-        // và tập bắn đặc biệt.
-        if (CurrentStep == Step.PickUpDice ||
-            CurrentStep == Step.DiceRoll ||
-            CurrentStep == Step.SpecialShoot)
-        {
-            return true;
-        }
-
-        return false;
     }
 
 
@@ -579,20 +543,13 @@ public class TutorialManager : MonoBehaviour
         // NORMAL SHOOT
         if (CurrentStep == Step.NormalShoot)
         {
-            if (enemy != tutorialEnemy)
-                return;
-
             if (waitingForDice)
                 return;
 
-            Debug.Log(
-                "[Tutorial] Normal enemy defeated!"
-            );
+            Debug.Log("[Tutorial] Normal enemy defeated!");
 
             tutorialEnemy = null;
             waitingForDice = true;
-
-            ResumePlayer();
 
             if (progressText != null)
                 progressText.text = "1/1";
@@ -606,34 +563,13 @@ public class TutorialManager : MonoBehaviour
         // SPECIAL SHOOT
         if (CurrentStep == Step.SpecialShoot)
         {
-            // Chấp nhận quái đã được chọn làm mục tiêu.
-            // Nếu chưa kịp chọn mục tiêu, tìm quái chết
-            // ở phía trước Player làm fallback.
-            if (tutorialEnemy != null &&
-                enemy != tutorialEnemy)
-                return;
-
-            if (tutorialEnemy == null &&
-                playerController != null &&
-                enemy.transform.position.x <
-                    playerController.transform.position.x)
-                return;
-
+            // Player phải sử dụng Special ít nhất một lần.
             if (!specialShotFired)
-            {
-                Debug.LogWarning(
-                    "[Tutorial] Enemy died without " +
-                    "a recorded special shot."
-                );
                 return;
-            }
 
-            Debug.Log(
-                "[Tutorial] Special enemy defeated!"
-            );
+            Debug.Log("[Tutorial] Special enemy defeated!");
 
             tutorialEnemy = null;
-            ResumePlayer();
 
             if (progressText != null)
                 progressText.text = "1/1";
