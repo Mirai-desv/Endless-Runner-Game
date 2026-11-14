@@ -1,13 +1,13 @@
 using EndlessRunner.Run.World;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.Events;
 
 namespace EndlessRunner.EditorTools
 {
     // Menu EndlessRunner > Validate All Chunks: kiểm tra mọi ChunkData trong project chỉ với một cú bấm
     public static class ChunkValidatorMenu
     {
-        [MenuItem("EndlessRunner/Validate All Chunks")]
         private static void ValidateAll()
         {
             string[] guids = AssetDatabase.FindAssets("t:ChunkData");

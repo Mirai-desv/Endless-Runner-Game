@@ -74,6 +74,10 @@ public class DestructibleObstacle : MonoBehaviour
         if (destroyed) return;
         destroyed = true;
 
+        // Hiệu ứng khói (chỉ chạy nếu object có gắn DeathSmoke).
+        DeathSmoke smoke = GetComponent<DeathSmoke>();
+        if (smoke != null) smoke.Play();
+
         // Tắt collider NGAY để trong khoảng chờ tường không còn chặn đạn
         // và không giết Player (tag "Obstacle").
         foreach (Collider2D col in GetComponentsInChildren<Collider2D>())

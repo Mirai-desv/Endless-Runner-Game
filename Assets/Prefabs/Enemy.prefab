@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3321060603733839110}
   - component: {fileID: 6630114892006432802}
   - component: {fileID: 6207358912038055541}
+  - component: {fileID: -3270850586550962638}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -274,3 +275,28 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &-3270850586550962638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5646540205675585091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45f8975d4ea1494f861db0071723a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathSmoke
+  smokeSprite: {fileID: 0}
+  color: {r: 0.85, g: 0.85, b: 0.9, a: 0.9}
+  materialOverride: {fileID: 0}
+  puffCount: 4
+  startSize: 0.9
+  endScaleMultiplier: 1.8
+  duration: 0.7
+  riseSpeed: 0.8
+  driftSpeed: 0.4
+  spinSpeed: 40
+  positionOffset: {x: 0, y: 0}
+  spread: 0.4
+  sortingOrderBoost: 5

@@ -175,10 +175,16 @@ public class AudioManager : MonoBehaviour
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
 
+        PlayerPrefs.DeleteKey(KeyMusic);
+        PlayerPrefs.DeleteKey(KeySfx);
+        PlayerPrefs.Save();
+
         masterVolume = PlayerPrefs.GetFloat(KeyMaster, masterVolume);
         musicVolume = PlayerPrefs.GetFloat(KeyMusic, musicVolume);
         sfxVolume = PlayerPrefs.GetFloat(KeySfx, sfxVolume);
         muted = PlayerPrefs.GetInt(KeyMuted, 0) == 1;
+
+        Debug.Log($"[AudioManager] Muted: {muted} | " + $"Master: {masterVolume} | " + $"Music: {musicVolume} | " + $"SFX: {sfxVolume}");
 
         EnsureEntries();
         table.Clear();
@@ -216,6 +222,11 @@ public class AudioManager : MonoBehaviour
         settingsWasOpen = false;
         deathHandled = false;
         pendingMenuShow = false;
+
+        combat = null;
+        controller = null;
+        hitReceiver = null;
+
         hookedButtons.Clear();
         nextBindTime = 0f;
         nextButtonScan = 0f;

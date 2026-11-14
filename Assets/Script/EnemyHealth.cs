@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -42,6 +41,10 @@ public class EnemyHealth : MonoBehaviour
 
         // Thông báo TRƯỚC khi Destroy.
         OnAnyEnemyDied?.Invoke(this);
+
+        // Hiệu ứng khói (chỉ chạy nếu object có gắn DeathSmoke).
+        DeathSmoke smoke = GetComponent<DeathSmoke>();
+        if (smoke != null) smoke.Play();
 
         Destroy(gameObject);
     }

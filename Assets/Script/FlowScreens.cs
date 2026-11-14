@@ -223,11 +223,10 @@ internal sealed class DiceRollScreen : FlowScreen
         Show(face);
 
         float fast = Mathf.Max(0.01f, flow.fastInterval);
-        float interval = fast;
         float timer = 0f;
         float elapsed = 0f;
 
-        while (true)
+        while (elapsed < flow.spinDuration)
         {
             yield return null;
 
@@ -239,15 +238,10 @@ internal sealed class DiceRollScreen : FlowScreen
             die.rectTransform.localScale =
                 Vector3.Lerp(die.rectTransform.localScale, dieBaseScale, 15f * dt);
 
-            if (timer < interval) continue;
-            timer -= interval;
+            if (elapsed >= flow.spinDuration) break;    // dừng ngay, không đổi thêm mặt nào
 
-            // Hết giai đoạn quay nhanh: mỗi lần đổi mặt, khoảng chờ kế tiếp dài dần.
-            if (elapsed > flow.spinDuration)
-            {
-                interval *= flow.slowdownGrowth;
-                if (interval > flow.stopInterval) break; // dừng hẳn, mặt đang hiện là kết quả
-            }
+            if (timer < fast) continue;
+            timer -= fast;
 
             face = NextFace(face);
             Show(face);

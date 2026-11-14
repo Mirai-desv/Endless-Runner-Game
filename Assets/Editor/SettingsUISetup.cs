@@ -1,9 +1,10 @@
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 using UnityEditor.Events;
 using UnityEditor.SceneManagement;
-using UnityEngine;
-using UnityEngine.UI;
 
 // Menu Tools > Endless Runner > Create Settings UI in Scene.
 // Tạo trong Canvas HUD: nút "SETTINGS" (góc phải trên) + Setting Panel mới
