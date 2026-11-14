@@ -4579,7 +4579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   player: {fileID: 1028025281}
-  offsetX: 3
+  offsetX: 5
   smoothSpeed: 5
   fixedY: 1
 --- !u!1 &2086638442
