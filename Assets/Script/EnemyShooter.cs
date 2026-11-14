@@ -1,7 +1,8 @@
 
 using UnityEngine;
+using EndlessRunner.Run.World;
 
-public class EnemyShooter : MonoBehaviour
+public class EnemyShooter : MonoBehaviour, IChunkResettable
 {
     [Header("References")]
     public Animator animator;
@@ -33,6 +34,38 @@ public class EnemyShooter : MonoBehaviour
                 player = target.transform;
         }
     }
+
+    private bool needsAnimatorReset;
+
+    void OnDisable()
+    {
+        needsAnimatorReset = true;
+    }
+
+    void OnEnable()
+    {
+        // Được bật lại sau khi chunk tái sử dụng: đưa animator về trạng thái ban đầu.
+        if (!needsAnimatorReset) return;
+        needsAnimatorReset = false;
+
+        if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+        }
+    }
+
+    // Được ChunkView gọi khi chunk tái sử dụng: reset trạng thái tấn công.
+    public void ResetForReuse()
+    {
+        hasDetectedPlayer = false;
+        isAttacking = false;
+        timer = 0f;
+
+        if (animator != null)
+            animator.ResetTrigger("Attack");
+    }
+
 
     void Update()
     {

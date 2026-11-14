@@ -1,7 +1,8 @@
 
 using UnityEngine;
+using EndlessRunner.Run.World;
 
-public class DicePickup : MonoBehaviour
+public class DicePickup : MonoBehaviour, IChunkResettable
 {
     [Range(1, 6)]
     public int luckyNumber = 4;
@@ -98,7 +99,13 @@ public class DicePickup : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void ResetForReuse()
+    {
+        triggered = false;
+        gameObject.SetActive(true);
     }
 
     private static void ApplyResult(

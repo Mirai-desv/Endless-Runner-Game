@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using EndlessRunner.Run.World;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IChunkResettable
 {
     [Header("Health")]
     [Min(1)] public int maxHealth = 1;
@@ -46,6 +47,13 @@ public class EnemyHealth : MonoBehaviour
         DeathSmoke smoke = GetComponent<DeathSmoke>();
         if (smoke != null) smoke.Play();
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void ResetForReuse()
+    {
+        currentHealth = maxHealth;
+        isDead = false;
+        gameObject.SetActive(true);
     }
 }
