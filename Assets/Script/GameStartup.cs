@@ -31,7 +31,7 @@ public class GameStartup : MonoBehaviour
         PlayerPrefs.Save();
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Home");
     }
 
     // Chỉ dùng khi TEST Tutorial từ đầu

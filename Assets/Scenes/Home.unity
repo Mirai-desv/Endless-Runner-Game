@@ -119,6 +119,160 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &609063046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 609063048}
+  - component: {fileID: 609063047}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &609063047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609063046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9388a72cd16bf574497474767e138dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  backgroundMusic: {fileID: 8300000, guid: 4db6b02d9730b5a458c72356650020a1, type: 3}
+  playMusicOnStart: 1
+  musicFadeTime: 1
+  masterVolume: 1
+  musicVolume: 0.6
+  sfxVolume: 1
+  sounds:
+  - name: NormalShot
+    id: 0
+    clips:
+    - {fileID: 8300000, guid: 7afd610949e5e9d49b0ee7b7142bedc9, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: SpecialShot
+    id: 1
+    clips:
+    - {fileID: 8300000, guid: d74ff568fb0ce9a418a9e5b14f72f24f, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: Jump
+    id: 2
+    clips:
+    - {fileID: 8300000, guid: 21d48fc8e3ed9ee4cbbd9e6a8d543a9e, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: DiceRoll
+    id: 3
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 1
+  - name: EnemyAttack
+    id: 4
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: EnemyBullet
+    id: 5
+    clips:
+    - {fileID: 8300000, guid: 89a227a378457cf49ab985b304e0e975, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: WallHit
+    id: 6
+    clips:
+    - {fileID: 8300000, guid: 902984d4a7fda9e4382dce68cff07d1c, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.08
+    loop: 0
+  - name: PickUp
+    id: 7
+    clips:
+    - {fileID: 8300000, guid: 6c281b8fb6dcbb24a93215a25ca29626, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: Die
+    id: 8
+    clips:
+    - {fileID: 8300000, guid: 618bbe56e6baa0c4d80f2bba0e8b76b2, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: ButtonClick
+    id: 9
+    clips:
+    - {fileID: 8300000, guid: 4ea6d5a1a1eb2c2499163d03ae7849bd, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  - name: MenuShow
+    id: 10
+    clips: []
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    minInterval: 0.03
+    loop: 0
+  voiceCount: 12
+  autoHook: 1
+  ignoreGameplayButtons: 1
+  ignoredButtons: []
+  duckMusic: 1
+  duckVolume: 0.35
+  gameOverMenuDelay: 0.8
+--- !u!4 &609063048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609063046}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &633970144
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +284,7 @@ GameObject:
   - component: {fileID: 633970147}
   - component: {fileID: 633970146}
   - component: {fileID: 633970145}
+  - component: {fileID: 633970148}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -211,6 +366,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &633970148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633970144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &745890298
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f02a0e08951974190a0785a8ccfca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
-  alwaysShowTutorialInEditor: 1
+  alwaysShowTutorialInEditor: 0
 --- !u!4 &2128611577
 Transform:
   m_ObjectHideFlags: 0
@@ -792,3 +991,4 @@ SceneRoots:
   - {fileID: 1117483515}
   - {fileID: 2128611577}
   - {fileID: 1878564807}
+  - {fileID: 609063048}
