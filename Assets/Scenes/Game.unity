@@ -3584,7 +3584,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   footProbeDistance: 0.35
-  downwardSpeed: 5
+  downwardSpeed: 10
   clearMargin: 0.03
   maxDropSeconds: 1.2
   debugDrop: 1

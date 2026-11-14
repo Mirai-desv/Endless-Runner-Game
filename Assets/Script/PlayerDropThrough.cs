@@ -15,7 +15,7 @@ public class PlayerDropThrough : MonoBehaviour
     private float footProbeDistance = 0.35f;
 
     [SerializeField, Min(0.1f)]
-    private float downwardSpeed = 5f;
+    private float downwardSpeed = 10f;
 
     [SerializeField, Min(0f)]
     private float clearMargin = 0.03f;
