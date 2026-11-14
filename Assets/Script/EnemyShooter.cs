@@ -12,6 +12,9 @@ public class EnemyShooter : MonoBehaviour
     [Header("Attack Settings")]
     public float attackRange = 10f;
     public float shootInterval = 2f;
+    public float firstAttackDelay = 1.5f;
+
+    private bool hasDetectedPlayer = false;
 
     private float timer;
     private bool isAttacking;
@@ -55,6 +58,12 @@ public class EnemyShooter : MonoBehaviour
         if (horizontalDistance < 0f ||
             horizontalDistance > attackRange)
             return;
+        // Lần đầu phát hiện Player
+        if (!hasDetectedPlayer)
+        {
+            hasDetectedPlayer = true;
+            timer = firstAttackDelay;
+        }
 
         timer -= Time.deltaTime;
 
