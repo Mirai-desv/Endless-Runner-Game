@@ -2376,7 +2376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0affb0aac6394dc47ae987f633dc1717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  runSpeed: 8
+  runSpeed: 10
   jumpForce: 15
   groundCheck: {fileID: 0}
   groundLayer:
@@ -2389,6 +2389,7 @@ MonoBehaviour:
   jumpBufferTime: 0.12
   allowAirDrop: 1
   allowDropJump: 1
+  airDropSpeed: 4
   debugGround: 0
 --- !u!70 &1028025278
 CapsuleCollider2D:

@@ -5,8 +5,13 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float runSpeed = 5f;
-    public float jumpForce = 11f;
+    public float runSpeed = 10f;
+    public float RunSpeed
+    {
+        get => runSpeed;
+        set => runSpeed = Mathf.Max(0f, value);
+    }
+    public float jumpForce = 16f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
